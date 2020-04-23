@@ -4,3 +4,12 @@
 .DS_Store
 /Manifest.toml
 /dev/
+
+*.out
+*.fls
+*.log
+*.gz
+*.fdb_latexmk
+*.aux
+*.ipynb_check*
+main.pdf
