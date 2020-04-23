@@ -2,5 +2,5 @@ using JpsiJpsi
 using Test
 
 @testset "JpsiJpsi.jl" begin
-    # Write your own tests here.
+    include("coupling_matrices.jl")
 end
