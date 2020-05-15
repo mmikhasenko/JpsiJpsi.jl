@@ -28,3 +28,16 @@ function fit_matrix(H; J = error("give J"))
                 Optim.Options(show_trace = false); autodiff = :forwarddiff))
     return found_pars
 end
+
+"""
+    randH(J)
+
+generates a random helicity-coupling matrix with complex coefficients
+using the basis of spin J.
+"""
+function randH(J)
+    fixed_pars = 2 .* rand(Complex{Float64},length(nJHs[J+1])) .- (1.0+1im)
+    fixed_pars ./= sqrt(sum(abs2, fixed_pars))
+    H = contract(nJHs[J+1], fixed_pars)
+    return H
+end
