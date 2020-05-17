@@ -42,8 +42,8 @@ function fit_sample(S; J = error("give J"), intensity=I4μ)
     H0(p) = contract(nJHs[J+1], unfold(p))
     Hn(p) = H0(p) ./ sqrt(sum(abs2, H0(p)))
     f(pars) = -sum(log, intensity.(S; H = Hn(pars)))
-    init_pars = rand(2n)
+    init_pars = 2 .* rand(2n) .- 1.0
     found_pars = Optim.minimizer(Optim.optimize(f, init_pars, BFGS(),
-                Optim.Options(show_trace = true); autodiff = :forwarddiff))
+                Optim.Options(show_trace = false); autodiff = :forwarddiff))
     return (LLH = f(found_pars), H = Hn(found_pars), couplings = unfold(found_pars))
 end
