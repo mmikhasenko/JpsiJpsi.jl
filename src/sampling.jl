@@ -17,17 +17,17 @@ function sample(Nev; H = error("couplings!"), intensity=I4μ)
     f(x) = -intensity(xR2vars(x); H=H)
     search_min(init) = Optim.minimizer(Optim.optimize(f, init, BFGS(),
                 Optim.Options(show_trace = false); autodiff = :forwarddiff))
-    Imins = f.([search_min(vars2xR(randvars())) for _ in 1:3])
+    Imins = f.([search_min(vars2xR(randvars())) for _ in 1:10])
     Imax = -min(Imins...)
     # atan(vars_of_min[1])*2/π, atan(vars_of_min[1])*2/π, atan(vars_of_min[1])*2
-    function rand_ev()
+    function rand_ev(Imax)
         vars = randvars()
         w = intensity(vars; H=H)
         w > Imax && error("something is wrong: w=$w > Imax=$Imax")
         w < Imax*rand() && return rand_ev()
         return vars
      end
-     return [rand_ev() for _ in 1:Nev]
+     return [rand_ev(Imax) for _ in 1:Nev]
 end
 
 """
