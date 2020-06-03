@@ -11,5 +11,7 @@
 *.gz
 *.fdb_latexmk
 *.aux
+*.blg
+*.bbl
 *.ipynb_check*
 main.pdf
