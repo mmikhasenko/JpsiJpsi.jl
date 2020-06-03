@@ -19,9 +19,9 @@ function plot_coscos(H; intensity=I4μ_intϕ)
 end
 plot_coscos(H1_t)
 
-p10_t = fit_sample(S1_t; J = 0)
-p11_t = fit_sample(S1_t; J = 1)
-p12_t = fit_sample(S1_t; J = 2)
+p10_t = fit_sample(S1_t; ng = 1)
+p11_t = fit_sample(S1_t; ng = 2)
+p12_t = fit_sample(S1_t; ng = 3)
 
 -sum(log, I4μ.(S1_t; H = H1_t))
 
@@ -32,8 +32,10 @@ p12_t = fit_sample(S1_t; J = 2)
 #     heatmap(imag.(H1_t)))
 
 plot(plot_coscos(H1_t),
-    plot_coscos(p10_t.H),
-    plot_coscos(p11_t.H),
-    plot_coscos(p12_t.H)
+     plot_coscos(p10_t.H),
+     plot_coscos(p11_t.H),
+     plot_coscos(p12_t.H)
 )
-bar([p10_t.LLH, p11_t.LLH, p12_t.LLH])
+let l = [p10_t.LLH, p11_t.LLH, p12_t.LLH]
+    bar(l .- min(l...))
+end

@@ -1,5 +1,7 @@
 using Plots
 using JpsiJpsi
+using PartialWaveFunctions
+using QuadGK
 
 # plotting
 let J = 2
@@ -27,12 +29,12 @@ function Hλλ(λ1,λ2; LS, J, j1=1, j2=1)
 end
 
 
-Hλλ(-1,-1; LS=LS_for_J1[1], J=1)
-Hλλ( 0, 0; LS=LS_for_J1[1], J=1)
-Hλλ( 1, 1; LS=LS_for_J1[1], J=1)
+let
+    e(m,m′) =
+        quadgk(z->3*sum(wignerd(1,m,ξ1, z)*wignerd(1,m′,ξ1, z) for ξ1 in [-1,1]), 0, 1)[1]/2
+    [e(m,m′) for m in -1:1, m′ in -1:1]
+end
 
-using PartialWaveFunctions
-using QuadGK
 
 # f(m,m′) = quadgk(z->3*sum(wignerd(1,m,ξ1,z)*wignerd(1,m′,ξ1,z) for ξ1 in [-1,1]), -1, 1)[1]/2
 f(m,m′) =
@@ -65,10 +67,3 @@ I(H, F1, F2) =
     sum(H[λ1,λ2]*F1[λ1,λ1′]*H[λ1′,λ2′]*F2[λ2,λ2′]*kronecker(λ1-λ2,λ1′-λ2′)
         for λ1 in 1:3, λ2 in 1:3, λ1′ in 1:3, λ2′ in 1:3)
 #
-let
-    e(m,m′) =
-        quadgk(z->3*sum(wignerd(1,m,ξ1, z)*wignerd(1,m′,ξ1, z) +
-                        wignerd(1,m,ξ1,-z)*wignerd(1,m′,ξ1,-z) for ξ1 in [-1,1]), 0, 1/sqrt(2))[1]/2
-    E = [e(m,m′) for m in -1:1, m′ in -1:1];
-    E ./ E[1,1]
-end

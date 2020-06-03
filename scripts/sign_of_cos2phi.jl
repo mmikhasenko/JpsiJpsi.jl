@@ -44,11 +44,25 @@ end
 @time M_for_J1_w = [randMcos2ϕ(1, Nd) for _ in 1:1000];
 @time M_for_J2_w = [randMcos2ϕ(2, Nd) for _ in 1:1000];
 
-let bins = range(-100,100,length=50)
+let bins = range(-0.2,0.2,length=50)
     plot(title="Odd and even spins",
         xlab="M2 moment")
-    histogram!(M_for_J0_w * 500, bins=bins, lab="J=0", α=0.8)
-    histogram!(M_for_J1_w * 500, bins=bins, lab="J=1", α=0.8)
-    histogram!(M_for_J2_w * 500, bins=bins, lab="J=2", α=0.8)
+    histogram!(M_for_J0_w, bins=bins, lab="J=0", α=0.8)
+    histogram!(M_for_J1_w, bins=bins, lab="J=1", α=0.8)
+    histogram!(M_for_J2_w, bins=bins, lab="J=2", α=0.8)
 end
-savefig(joinpath("plots", "moment_M2phi_Nev=500.pdf"))
+savefig(joinpath("plots", "moment_M2phi_Nev=$(Nd).pdf"))
+
+const Nd′ = 1500;
+@time M_for_J0_w′ = [randMcos2ϕ(0, Nd′) for _ in 1:1000];
+@time M_for_J1_w′ = [randMcos2ϕ(1, Nd′) for _ in 1:1000];
+@time M_for_J2_w′ = [randMcos2ϕ(2, Nd′) for _ in 1:1000];
+
+let bins = range(-0.2,0.2,length=50)
+    plot(title="Odd and even spins",
+        xlab="M2 moment")
+    histogram!(M_for_J0_w′, bins=bins, lab="J=0", α=0.8)
+    histogram!(M_for_J1_w′, bins=bins, lab="J=1", α=0.8)
+    histogram!(M_for_J2_w′, bins=bins, lab="J=2", α=0.8)
+end
+savefig(joinpath("plots", "moment_M2phi_Nev=$(Nd′).pdf"))
