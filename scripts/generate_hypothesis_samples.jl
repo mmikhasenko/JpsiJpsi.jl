@@ -19,13 +19,10 @@ function makesim(d::Dict)
     #
     fulld = copy(d)
     #
-    H1_t = randH(ng_gen) # J = 1
-    fulld[:Hgen] = H1_t
-    #
     @time TS = [let
         println("\nitteration $(e)/$(Nsampl)\n")
         #
-        S1_t = sample(Nev; H = H1_t)
+        S1_t = sample(Nev; H = Hgen)
         fits = [[fit_sample(S1_t; ng = ng) for _ in 1:Natt] for ng in ng_fit_by]
         best_fits = [f[findmin(getproperty.(f, :LLH))[2]] for f in fits]
         #
@@ -37,19 +34,22 @@ function makesim(d::Dict)
 end
 
 params = Dict(
-    :Nev => 500,
-    :Natt => 2,
+    :Nev => 10,
+    :Natt => 1,
     :Nsampl => 2,
-    :ng_gen => 1,
+    :gen_group => 1
+    :Hgen => randH(1),
     :ng_fit_by => collect(1:7),
 )
 let
     f = makesim(params)
     wsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
+    # @tagsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
 end
-fs = readdir(datadir("simulations","groups_cross_testing"))[2]
-l = wload(datadir("simulations", "groups_cross_testing", fs))
-l[:fit_results]
+#
+# fs = readdir(datadir("simulations","groups_cross_testing"))[2]
+# l = wload(datadir("simulations", "groups_cross_testing", fs))
+# l[:fit_results]
 
 # @save joinpath(path_to_save, "results_J$(ngsample)_Nev$(Nev)_Natt$(Natt)_Nsamples$(Nsampl).jld2") f
 
