@@ -24,22 +24,22 @@ function sample(Nev; H = error("couplings!"), intensity=I4μ)
         vars = randvars()
         w = intensity(vars; H=H)
         w > Imax && error("something is wrong: w=$w > Imax=$Imax")
-        w < Imax*rand() && return rand_ev()
+        w < Imax*rand() && return rand_ev(Imax)
         return vars
      end
      return [rand_ev(Imax) for _ in 1:Nev]
 end
 
 """
-    fit_sample(S; J = error("give J"), intensity=I4μ)
+    fit_sample(S; ng=error("give number of category"), intensity=I4μ)
 
-fit sample `S` using a model of `intensity` with spin hypothesis `J`.
+fit sample `S` using a model of `intensity` with spin hypothesis of category `ng`.
 The function returns LLH and the matrix `H` constructed from the fit parameters.
 """
-function fit_sample(S; J = error("give J"), intensity=I4μ)
-    n = length(nJHs[J+1])
+function fit_sample(S; ng=error("give number of category"), intensity=I4μ)
+    n = length(ngHs[ng])
     unfold(p) = p[1:n] + 1im .* p[(n+1):end]
-    H0(p) = contract(nJHs[J+1], unfold(p))
+    H0(p) = contract(ngHs[ng], unfold(p))
     Hn(p) = H0(p) ./ sqrt(sum(abs2, H0(p)))
     f(pars) = -sum(log, intensity.(S; H = Hn(pars)))
     init_pars = 2 .* rand(2n) .- 1.0
