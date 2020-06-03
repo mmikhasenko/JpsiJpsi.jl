@@ -39,7 +39,7 @@ end
 params = Dict(
     :Nev => 500,
     :Natt => 2,
-    :Nsampl => 1,
+    :Nsampl => 2,
     :ng_gen => 1,
     :ng_fit_by => collect(1:7),
 )
@@ -47,8 +47,9 @@ let
     f = makesim(params)
     wsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
 end
-readdir(datadir("simulations","groups_cross_testing"))
-
+fs = readdir(datadir("simulations","groups_cross_testing"))[2]
+l = wload(datadir("simulations", "groups_cross_testing", fs))
+l[:fit_results]
 
 # @save joinpath(path_to_save, "results_J$(ngsample)_Nev$(Nev)_Natt$(Natt)_Nsamples$(Nsampl).jld2") f
 
