@@ -35,3 +35,12 @@ params = Dict(
 
 f = makesim(params)
 wsave(datadir("simulations", "groups_cross_testing", savename(params, "jld2")), f)
+
+let bins=range(350,500,length=100)
+    plot(size=(500,350))
+    stephist!(map(v->v[1].LLH, f["fit_results"]), bins=bins, lab="group-I")
+    stephist!(map(v->v[2].LLH, f["fit_results"]), bins=bins, lab="group-II")
+    stephist!(map(v->v[3].LLH, f["fit_results"]), bins=bins, lab="group-III")
+    stephist!(map(v->v[4].LLH, f["fit_results"]), bins=bins, lab="group-IV")
+end
+savefig(plotsdir("llh_testing_higgs.pdf"))
