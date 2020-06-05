@@ -29,7 +29,7 @@ params = Dict(
     "Natt" => 5,
     "Nsampl" => 500,
     "gen_group" => 1,
-    "Hgen" => Diagonal(fill(2.0,3)),
+    "Hgen" => Diagonal(fill(1.0,3)),
     "ng_fit_by" => collect(1:7),
 )
 
