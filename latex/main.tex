@@ -25,6 +25,16 @@ nofootinbib,superscriptaddress]{revtex4}
 
 
 \newcommand{\diff}{\mathrm{d}}
+\newcommand{\ket}[1]{\ensuremath{\left|#1\right\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\left\langle #1\right|}}
+\newcommand{\TS}{\mathrm{TS}}
+\newcommand{\LLH}{\mathrm{LLH}}
+\newcommand{\M}{\mathcal{M}}
+%
+\newcommand{\I}{\ensuremath{I}}
+\newcommand{\II}{\ensuremath{{I\!I}}}
+\newcommand{\III}{\ensuremath{{I\!I\!I}}}
+\newcommand{\IV}{\ensuremath{{I\!V}}}
 
 \begin{document}
 \title{Decay to two identical vectors, revisited.}
@@ -54,14 +64,7 @@ Model-independent approach relying on rotational symmetries.
 \definecolor{cola}{rgb}{0.9,0.62,0.0}
 \definecolor{colb}{rgb}{0.337, 0.706, 0.914 }
 \definecolor{colc}{rgb}{0.0, 0.62, 0.451}
-
-\newcommand{\I}{\ensuremath{I}}
-\newcommand{\II}{\ensuremath{{I\!I}}}
-\newcommand{\III}{\ensuremath{{I\!I\!I}}}
-\newcommand{\IV}{\ensuremath{{I\!V}}}
 %
-\newcommand{\TS}{\mathrm{TS}}
-
 \section{Introduction}
 
 Model-independent analysis of the particle interaction based on the
@@ -79,6 +82,13 @@ Higgs to 4l analysis~\cite{Aad:2013xqa,CMS:2018mmw}
 
 \section{Angular amplitude}
 
+\begin{figure}
+  \includegraphics[width=0.6\textwidth]{../plots/production.pdf}
+  \caption{Schematic view of kinematics of $X$ state produced at the $pp$ collider and decaying to two identical particles denoted by $V$. The black arrows shows three dimensional vectors of particles. A shaped arrow gives the direction of polarization of $X$.
+  % The dashed lines
+  }
+  \label{fig:production}
+\end{figure}
 The measured intensity
 \begin{align}
     I(\theta,\theta_1,\phi_1,\theta_2,\phi_2) &= \sum_{M}P_M
@@ -95,7 +105,17 @@ where the production amplitude is given by
   d_{\lambda_1,\xi_1}^{1}(\theta_1) d_{\lambda_2,\xi_2}^{1}(\theta_2).
 \end{align}
 The helicity couplings $H_{\lambda_1,\lambda_2}$ are $3\times 3$ matrices,
+defined by
+\begin{equation}
+  H_{\lambda_1,\lambda_2} = \bra{JM;\lambda_1,\lambda_2}\hat{T}\ket{JM}
+\end{equation}
 constrained by parity and permutation symmetry.
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{../plots/angles.pdf}
+  \caption{Schematic view of the $X\to V(\mu^+\mu^-)\,V(\mu^+\mu^-)$ decay kinematics.
+  The black arrows shows three dimensional vectors of particles. A shaped arrow gives the direction of polarization of $X$.}
+  \label{fig:X.decay}
+\end{figure}
 The parity leads to relation between the opposite values of helicity:
 \begin{equation} \label{eq:parity}
 H_{\lambda_1,\lambda_2} = P (-1)^J H_{-\lambda_1,-\lambda_2},
@@ -109,58 +129,58 @@ H_{\lambda_1,\lambda_2} = (-1)^J H_{\lambda_2,\lambda_1},
 The matrices of the helicity couplings are symmetric (anti-symmetric) for the even-spin (odd-spin) decay particle.
 Combining two symmetries we split all possible quantum numbers $J^P$ into four groups as shown in Tab.~\ref{tab:couplings}.
 \begin{table}
-  \caption{}
+  \caption{Possible quantum numbers of the decaying particle $X$ separated to four groups with respect of symmetry of the helicity matrix. The framed quantum numbers in the last column have additional restrictions due to the maximal value of the spin projection.}
   \label{tab:couplings}
-  \begin{tabular}{c | c | c}
-    group & $P(-1)^{J},(-1)^{J}$ &\\\hline
-    \I   & $+,+$ & \fbox{$0^+$}, $2^+$, $4^+$, $6^+$\\
-    \II  & $-,+$ & \fbox{$0^-$}, $2^-$, $4^-$, $6^-$\\
-    \III & $+,-$ & $1^-$, $3^-$, $5^-$, $7^-$\\
-    \IV  & $-,-$ & \fbox{$1^+$}, $3^+$, $5^+$, $7^+$
+  \begin{tabular}{c | r | r | l}
+    group & $(-1)^{J}$ & $P(-1)^{J}$ & explicit $J^P$\\\hline
+    \I    & even($+$) &   natural($+$) & \fbox{$0^+$}, $2^+$, $4^+$, $6^+$\\
+    \II   & even($+$) & unnatural($-$) & \fbox{$0^-$}, $2^-$, $4^-$, $6^-$\\
+    \III  & odd($-$)  &   natural($+$) &        $1^-$, $3^-$, $5^-$, $7^-$\\
+    \IV   & odd($-$)  & unnatural($-$) & \fbox{$1^+$}, $3^+$, $5^+$, $7^+$
   \end{tabular}
 \end{table}
 The relations Eq.~\eqref{eq:parity} and Eq.~\eqref{eq:permutation} greatly reduce the number of free components of the helicity matrix.
 \begin{align}
-  M_\I&=\begin{pmatrix}
+  H_\I&=\begin{pmatrix}
     b & a & c\\
     a & d & a\\
     c & a & b
   \end{pmatrix}_S&
-  M_\II&=\begin{pmatrix}
+  H_\II&=\begin{pmatrix}
     b & a &  \\
     a &   & -a\\
       & -a & -b
   \end{pmatrix}_S&
-  M_{\III}&=\begin{pmatrix}
+  H_{\III}&=\begin{pmatrix}
       & a &  \\
     -a &   & -a\\
       & a &
   \end{pmatrix}_A&
-  M_{\IV}&=\begin{pmatrix}
+  H_{\IV}&=\begin{pmatrix}
       & a & c\\
     -a &   & a\\
     -c & -a &
   \end{pmatrix}_A
 \end{align}
-
-There are three special cases:
-\begin{align} \label{eq:matrices.spec}
-  M_\I^{(0^+)}&=\begin{pmatrix}
-    b & & \\
-    & d &\\
-    & & b
-  \end{pmatrix}_S&
-  M_\II^{(0^-)}&=\begin{pmatrix}
-    b &  &  \\
-     &   & \\
-      &  & -b
-  \end{pmatrix}_S&
-  M_{\IV}^{(1^+)}&=\begin{pmatrix}
-      & a & \\
-    -a &   & a\\
-      & -a &
-  \end{pmatrix}_A
-\end{align}
+There are three special cases, $0^+$ of the first group for which $a=c=0$,
+$0^-$ in the second group with $a=0$, and $1^+$ in the forth group with $c=0$.
+% \begin{align} \label{eq:matrices.spec}
+%   H_\I^{(0^+)}&=\begin{pmatrix}
+%     b & & \\
+%     & d &\\
+%     & & b
+%   \end{pmatrix}_S&
+%   H_\II^{(0^-)}&=\begin{pmatrix}
+%     b &  &  \\
+%      &   & \\
+%       &  & -b
+%   \end{pmatrix}_S&
+%   H_{\IV}^{(1^+)}&=\begin{pmatrix}
+%       & a & \\
+%     -a &   & a\\
+%       & -a &
+%   \end{pmatrix}_A
+% \end{align}
 
 
 \section{Unpolarized decay}
@@ -182,22 +202,26 @@ The most powerful method for testing spin hypothesis is the multidimensional fit
 For simplicity we consider the case of the negligible polarization in three dimensions, while all discussion is easy to generalize to the five dimensional case that includes
 the polarization degrees of freedom.
 The test statistics is defined by
+\begin{align}
+  \TS_{M/M'} = \LLH_M - \LLH_{M'},
+\end{align},
+where the $\LLH_M$ is the maximized value of the log likelihood over the set of helicity couplings.
 \begin{equation}
-  \TS_M = \frac{1}{N_\mathrm{ev}} \sum_{e=1}^{N_\mathrm{ev}} \log I(\tau_e|M\{\hat{h}\}),
+  \LLH_M = \frac{1}{N_\mathrm{ev}} \sum_{e=1}^{N_\mathrm{ev}} \log I(\tau_e|M\{\hat{h}\}).
 \end{equation}
-where $I(\tau_e|\hat{c})$ is the intensity of the decay model $M$ calculating for the kinematic variables of the event $e$ after the model parameters are optimized to maximize $\TS_M$.
+The intensity $I(\tau_e|\hat{c})$ is calculated for the kinematic variables of the event $e$.
 The optimized model parameters are demoted by $\hat{h}$.
 
 Normalization for the fitted density is established using the relation,
-% The normalization consition needs to be inforced
 \begin{align}
-  \int I(\theta_1,\theta_2,\phi)\,\frac{\diff\cos\theta_1\,\diff\cos\theta_2\,\diff \phi}{8\pi} = \sum_{\lambda_1,\lambda_2} |H_{\lambda_1\lambda_2}|^2.
+  \int I(\theta_1,\theta_2,\phi)\,\frac{\diff\cos\theta_1\,\diff\cos\theta_2\,\diff \phi}{8\pi} = N \sum_{\lambda_1,\lambda_2} |H_{\lambda_1\lambda_2}|^2.
 \end{align}
 
 Fig.~\ref{fig:TS.fixedH} shows an example of the test-statistics distribution obtained on the statistical sample of the fixed group-\III coupling matrix.
 
 \begin{figure}
-  \includegraphics[width=0.5\textwidth]{../plots/fit_of_J1.pdf}
+  \includegraphics[width=0.48\textwidth]{../plots/llh_testing_higgs.pdf}
+  \includegraphics[width=0.48\textwidth]{../plots/TS_0p_vs_1m.pdf}
   \caption{Test statistics distribution testing hypothesis of groups $\I-\IV$ and the special cases on the statistical ensemble of the $500$ events data samples generated based on
   the fixed group-$\III$ coupling matrix. }
   \label{fig:TS.fixedH}
@@ -213,7 +237,17 @@ hence the helicity amplitude reads:
   A^{H\to ZZ}_{\lambda_1,\lambda_2} = 2i\frac{m_Z^2}{v} (\epsilon_1^*(\lambda_1)\cdot\epsilon_2^*(\lambda_2)).
 \end{equation}
 Using the explicit expressions for the polarization $\epsilon$ vectors,
-we find that the matrix of helicity couplings is proportional to identity, i.e. $b=d=1/\sqrt{3}$ in Eq.~\eqref{eq:matrices.spec}.
+we find a special case of the matrix for group-$\I$,
+\begin{equation}
+  H \sim \begin{pmatrix}
+    1 & &\\
+    & 1+\frac{2p^2}{m^2} &\\
+    & & 1
+\end{pmatrix}
+\end{equation}
+The matrix is proportional to identity (S-wave) close to the nominal $ZZ$ production threshold,
+the contribution of the $D$-wave is given by $p^2/m^2$.
+ % is proportional to identity close to the production threshold, $, i.e. $b=d=1/\sqrt{3}$ in .
 
 % The Standard Model on the tree level predicts a simple coupling of the Higgs to a pair of $Z^0$ bosons.
 % \begin{equation}
@@ -246,6 +280,18 @@ Useful relations for $\cos\theta$ integrals
   \begin{pmatrix}1 & 0 & -1\\0 & 1 & 0\\-1 & 0 & 1\end{pmatrix}_{\lambda\lambda'},\\
 \end{align}
 
+\begin{figure}
+  \includegraphics[width=0.48\textwidth]{../plots/phi_higgs.pdf}
+  \caption{}
+  \label{}
+\end{figure}
+
+\section*{Acknowledgement}
+The project was motivated by discussion in the LHCb Amplitude Analysis group.
+Especially we thank Biplab Day for organizing seminar dedicated to $X\to VV$.
+We gratefully acknowledge Alessandro Pilloni for useful comments on the work.
+We thank Liupan An and Ronan McNulty for finding practical cases for the analysis.
+
 \appendix
 
 \section{Polarization vectors}
@@ -253,8 +299,8 @@ Useful relations for $\cos\theta$ integrals
 For calculation of the Higgs decay ampluitude in Eq.~\eqref{eq:HZZ}
 we used explicit expressions for the polarization vectors:
 \begin{align}
-  \epsilon_z(\pm1) &= (0,-i,\mp 1,0)\frac{1}{\sqrt{2}}, &
-  \epsilon_z(0) &= (-p,0,0,E)\frac{1}{m_Z},
+  \epsilon_z^{\mu}(\pm1) &= \frac{1}{\sqrt{2}} \left( 0,\mp 1,-i,0 \right), &
+  \epsilon_z^{\mu}(0) &= \frac{1}{m_Z} \left(p,0,0,E\right),
 \end{align}
 where $E$, $p$, and $m_Z$ are the energy, momentum, and the mass of the $Z$ boson.
 The general expressions for the rotational vectors follows:
@@ -286,7 +332,7 @@ The intensity reads:
    &\quad + \frac{s \eta \left(\cos{\left (- 2 \theta_{1} + 2 \theta_{2} + \phi \right )} + \cos{\left (2 \theta_{1} - 2 \theta_{2} + \phi \right )} - \cos{\left (2 \theta_{1} + 2 \theta_{2} - \phi \right )} - \cos{\left (2 \theta_{1} + 2 \theta_{2} + \phi \right )}\right)}{8}\\ \nonumber
    &\quad+\frac{\eta^{2} \sin^{2}{\left (\theta_{2} \right )} \cos^{2}{\left (\theta_{1} \right )}}{2} + \frac{\eta^{2} \sin^{2}{\left (\theta_{2} \right )}}{2} + \frac{\sin^{2}{\left (\theta_{2} \right )} \cos^{2}{\left (\theta_{1} \right )}}{2} + \frac{\sin^{2}{\left (\theta_{2} \right )}}{2}
 \end{align}
-The expression does not change under flip of $\eta$ and $s$ sign simultaniously.
+The expression does not change under flip of $\eta$ and $s$ sign simultaneously.
 Hence the group-$\III$ cannot be distinguished from the group-$\II$.
 
 \bibliography{ref}
