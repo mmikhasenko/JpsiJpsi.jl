@@ -81,48 +81,94 @@ Extensive phenomenological analysis of four-lepton production at LHC~\cite{Bolog
 Higgs to 4l analysis~\cite{Aad:2013xqa,CMS:2018mmw}
 
 \section{Angular amplitude}
-
+A convenient frame for description of the production polarization is the Gottfried-Jackson frame
+show in Fig.~\ref{fig:production}. The production plane defined by the vectors of the beam give $x-z$ plane:
+the $z$ axis takes the direction of one of the beam particle (for clarity, "left" in the lab frame),
+and the $y$ axis is the plane normal calculated by $\vec p'\to \vec p$.
+A negligibly-small polarization was measured in the prompt production of hadrons~\cite{Lambda@ATLAS, Charmoniub, Lambdab}.
+While the peripheral processes, as central exclusive production, are expected to yield a significant polarization~\cite{}. For the latter case, high spin projections are still suppressed~\cite{Chung-Treiman}.
 \begin{figure}
   \includegraphics[width=0.6\textwidth]{../plots/production_GJ.pdf}
-  \caption{Schematic view of kinematics of $X$ state produced at the $pp$ collider and decaying to two identical particles denoted by $V$. The black arrows shows three dimensional vectors of particles. A shaped arrow gives the direction of polarization of $X$.
-  % The dashed lines
-  }
+  \caption{Schematic view of production kinematics of $X$ state at the $pp$ collider.
+  The Gottfried-Jackson frame is used for describing production kinematics.
+  It is defined in the rest frame of $X$ by the vectors of the beam particles:
+  $\vec z = \vec p / |\vec p|$, $\vec y = \vec p' \times \vec p / |\vec p' \times \vec p|$, $\vec x = \vec y \times \vec z$.
+  The spherical angles $(\theta,\phi)$ are the angles of one of two decay vectors in the GJ frame.
+  The black arrows shows three dimensional vectors of particles.}
   \label{fig:production}
 \end{figure}
-The measured intensity
+
+The non-zero polarization manifests itself in the angular dependence of the decay products (see $(\theta,\phi)$ in Fig.~\ref{fig:production}).
+The intensity of the decay is defined as a differential cross section over angular variables,
+$I = \diff \sigma / \diff \Omega\,\diff \Omega_1\,\diff \Omega_2$, where
+$\diff\Omega = \diff\cos\theta \diff \phi$; the $\Omega_i$, $i=1,2$ are the spherical angles of the decay products of the two vector particles in the corresponding helicity frames as shown in Fig.~\ref{fig:X.decay}.
+
+The intensity reads:
 \begin{align}
-    I(\theta,\theta_1,\phi_1,\theta_2,\phi_2) &= \sum_{M}P_M
+    I(\Omega,\Omega_1,\Omega_2) &= (2J+1) \sum_{M,M'}R_{M,M'}\,
+    D_{M,\nu}^{J}(\phi,\theta,\phi_1) D_{M',\nu'}^{J*}(\phi,\theta,\phi_1)
     \sum_{\xi_1,\xi_2}^{\{-1,1\}}
-    \left|A^{M}_{\xi_1,\xi_2}(\theta,\theta_1,\phi_1,\theta_2,\phi_2)\right|^2,
+    A^{\nu}_{\xi_1,\xi_2}(\Omega_1,\Omega_2) A^{\nu'*}_{\xi_1,\xi_2}(\Omega_1,\Omega_2),
 \end{align}
-where the production amplitude is given by
+where we have explicitly separated the production and decay part of the amplitude.
+The production dynamics encapsulated into the polarization matrix $R_{M,M'}$.
+The decay amplitude $X\to V(\mu^+\mu^-)V(\mu^+\mu^-)$ is denoted $A^{\lambda}_{\xi_1,\xi_2}$
+with $\nu$ being the difference of the vector's helicities, and $\xi$ being the difference of the muon's helicities. $J$ and $M$ are the spin and spin projection of the $X$.
+% ,$I_0$ is the total integrated intensity
+We used the angle $\phi_1$ as the third Euler angle for the orientation of
+the solid body of the decay products vectors~\cite{DPD}. With this choice the
+decay amplitude is determined by just three angles:
+the polar angles of the vector decay, and the azimuthal difference of the decay planes (see Fig.~\ref{fig:X.decay})
 \begin{align}
-  A^{M}_{\xi_1,\xi_2}(\theta,\theta_1,\phi_1,\theta_2,\phi_2) &= 3
+  A^{\nu}_{\xi_1,\xi_2}(\theta_1,\theta_2,\Delta\phi) &= 3
   \sum_{\lambda_1,\lambda_2}
-  d_{M,\lambda_1-\lambda_2}^{J}(\theta) (-1)^{1-\lambda_2}
+  \delta_{\nu,\lambda_1-\lambda_2} (-1)^{1-\lambda_2}
   H_{\lambda_1\lambda_2}
-  e^{i\lambda_1\phi_1+i\lambda_2\phi_2}
   d_{\lambda_1,\xi_1}^{1}(\theta_1) d_{\lambda_2,\xi_2}^{1}(\theta_2).
+  e^{i\lambda_2 \Delta\phi}
 \end{align}
-The helicity couplings $H_{\lambda_1,\lambda_2}$ are $3\times 3$ matrices,
-defined by
-\begin{equation}
-  H_{\lambda_1,\lambda_2} = \bra{JM;\lambda_1,\lambda_2}\hat{T}\ket{JM}
-\end{equation}
-constrained by parity and permutation symmetry.
+The factor $(-1)^{1-\lambda_2}$ is related to the Jacob-Wick particle-2 phase convention.
+Once the phase is factored out of the helicity coupling matrix $H_{\lambda_1,\lambda_2}$
+the symmetry relations for $H$ are significantly simpler.
 \begin{figure}
   \includegraphics[width=0.8\textwidth]{../plots/angles.pdf}
   \caption{Schematic view of the $X\to V(\mu^+\mu^-)\,V(\mu^+\mu^-)$ decay kinematics.
-  The black arrows shows three dimensional vectors of particles. A shaped arrow gives the direction of polarization of $X$.}
+  The central three planes show orientation of vectors in the $X$ rest frame.
+  The right and left most planes show the decay angles of $J/\psi_1$ and $J/\psi_2$ in the rest frame, respectively.
+  % The black arrows shows three dimensional vectors of particles.
+  % A shaped arrow gives the direction of polarization of $X$.
+  }
   \label{fig:X.decay}
 \end{figure}
-The parity leads to relation between the opposite values of helicity:
+
+
+% \begin{equation} \label{eq:delta}
+%   \sum_M d_{M,\lambda_1-\lambda_2}^{J}(\theta) d_{M,\lambda_1'-\lambda_2'}^{J}(\theta) = \delta_{\lambda_1-\lambda_2,\lambda_1'-\lambda_2'}.
+% \end{equation}
+% On contrast, the observed non-trivial dependence of the intensity on $\cos\theta$
+% would indicate polarization of the initial state.
+% Once the orientation of the production plane is averaged, the intensity becomes a function of just three quantities: polar decay angles of leptons, the difference on the azimuthal angles, $\Delta\phi = \phi_1+\phi_2$. It is easy to see transforming the azimuthal dependence,
+% \begin{equation}
+% i\lambda_1\phi_1+i\lambda_2\phi_2 = i(\lambda_1-\lambda_2)\phi_1+i\lambda_2\Delta\phi
+% \end{equation}
+% The first term on the left side of the expression vanishes once the amplitude is multiplied
+% to the conjugated with help of Eq.~\eqref{eq:delta}.
+
+\section{Symmetry constraints}
+The matrix of the helicity couplings is strictly defined by
+ % $H_{\lambda_1,\lambda_2}$ is a $3\times 3$ matrix
+\begin{equation} \label{eq:helicity.def}
+  H_{\lambda_1,\lambda_2} = \bra{JM;\lambda_1,\lambda_2}\hat{T}\ket{JM},
+\end{equation}
+where the bra-state is the protected two-particle state in the particle-2 convention,
+the ket-state is the decaying state with the defined spin $J$ and spin projection $M$~\cite{Martin.Spearman}.
+The matrix is constrained by parity and permutation symmetry.
+The parity relates the opposite values of the vector's helicities:
 \begin{equation} \label{eq:parity}
 H_{\lambda_1,\lambda_2} = P (-1)^J H_{-\lambda_1,-\lambda_2},
 \end{equation}
-where $P$ is internal parity of the decaying particle. The product $P (-1)^J$ is commonly referred to as the naturality.
-It determines the symmetry of the matrix under reflection through the center.
-Identity of the decay particle gives a relation of the helicity matrix with the transposed one.
+with $P$ being the internal parity of the decaying particle.
+Identity of the decay particle relates the helicity matrix with the transposed one.
 \begin{equation} \label{eq:permutation}
 H_{\lambda_1,\lambda_2} = (-1)^J H_{\lambda_2,\lambda_1},
 \end{equation}
@@ -131,6 +177,7 @@ Combining two symmetries we split all possible quantum numbers $J^P$ into four g
 \begin{table}
   \caption{Possible quantum numbers of the decaying particle $X$ separated to four groups with respect of symmetry of the helicity matrix. The framed quantum numbers in the last column have additional restrictions due to the maximal value of the spin projection.}
   \label{tab:couplings}
+  \begin{ruledtabular}
   \begin{tabular}{c | r | r | l}
     group & $(-1)^{J}$ & $P(-1)^{J}$ & explicit $J^P$\\\hline
     \I    & even($+$) &   natural($+$) & \fbox{$0^+$}, $2^+$, $4^+$, $6^+$\\
@@ -138,6 +185,7 @@ Combining two symmetries we split all possible quantum numbers $J^P$ into four g
     \III  & odd($-$)  &   natural($+$) &        $1^-$, $3^-$, $5^-$, $7^-$\\
     \IV   & odd($-$)  & unnatural($-$) & \fbox{$1^+$}, $3^+$, $5^+$, $7^+$
   \end{tabular}
+  \end{ruledtabular}
 \end{table}
 The relations Eq.~\eqref{eq:parity} and Eq.~\eqref{eq:permutation} greatly reduce the number of free components of the helicity matrix.
 \begin{align}
@@ -183,20 +231,6 @@ $0^-$ in the second group with $a=0$, and $1^+$ in the forth group with $c=0$.
 % \end{align}
 
 
-\section{Unpolarized decay}
-The prompt production is known to yield negligible polarization \cite{Lambda@ATLAS, Charmoniub, Lambdab}. The dependence on $\theta$ disappear in that case:
-\begin{equation} \label{eq:delta}
-  \sum_M d_{M,\lambda_1-\lambda_2}^{J}(\theta) d_{M,\lambda_1'-\lambda_2'}^{J}(\theta) = \delta_{\lambda_1-\lambda_2,\lambda_1'-\lambda_2'}.
-\end{equation}
-On contrast, the observed non-trivial dependence of the intensity on $\cos\theta$
-would indicate polarization of the initial state.
-Once the orientation of the production plane is averaged, the intensity becomes a function of just three quantities: polar decay angles of leptons, the difference on the azimuthal angles, $\phi = \phi_1+\phi_2$. It is easy to see transforming the azimuthal dependence,
-\begin{equation}
-i\lambda_1\phi_1+i\lambda_2\phi_2 = i(\lambda_1-\lambda_2)\phi_1+i\lambda_2\phi
-\end{equation}
-The first term on the left side of the expression vanishes once the amplitude is multiplied
-to the conjugated with help of Eq.~\eqref{eq:delta}.
-
 \section{Test statistics}
 The most powerful method for testing spin hypothesis is the multidimensional fit.
 For simplicity we consider the case of the negligible polarization in three dimensions, while all discussion is easy to generalize to the five dimensional case that includes
@@ -210,15 +244,12 @@ where the $\LLH_M$ is the maximized value of the log likelihood over the set of 
   \LLH_M = \frac{1}{N_\mathrm{ev}} \sum_{e=1}^{N_\mathrm{ev}} \log I(\tau_e|M\{\hat{h}\}).
 \end{equation}
 The intensity $I(\tau_e|\hat{c})$ is calculated for the kinematic variables of the event $e$.
-The optimized model parameters are demoted by $\hat{h}$.
-
-Normalization for the fitted density is established using the relation,
-\begin{align}
-  \int I(\theta_1,\theta_2,\phi)\,\frac{\diff\cos\theta_1\,\diff\cos\theta_2\,\diff \phi}{8\pi} = N \sum_{\lambda_1,\lambda_2} |H_{\lambda_1\lambda_2}|^2.
-\end{align}
-
-Fig.~\ref{fig:TS.fixedH} shows an example of the test-statistics distribution obtained on the statistical sample of the fixed group-\III coupling matrix.
-
+The optimized model parameters are demoted by $\hat{h}$. We use a convenient normalization condition $\mathrm{Tr}(HH^\dagger) = \mathbb{I}$.
+% Normalization for the fitted density is established using the relation,
+% \begin{align}
+%   \int I(\theta_1,\theta_2,\Delta\phi)\,\frac{\diff\cos\theta_1\,\diff\cos\theta_2\,\diff \Delta\phi}{8\pi} = N \sum_{\lambda_1,\lambda_2} |H_{\lambda_1\lambda_2}|^2.
+% \end{align}
+% Fig.~\ref{fig:TS.fixedH} shows an example of the test-statistics distribution obtained on the statistical sample of the fixed group-\III coupling matrix.
 \begin{figure}
   \includegraphics[width=0.48\textwidth]{../plots/llh_testing_higgs.pdf}
   \includegraphics[width=0.48\textwidth]{../plots/TS_0p_vs_1m.pdf}
@@ -229,7 +260,7 @@ Fig.~\ref{fig:TS.fixedH} shows an example of the test-statistics distribution ob
 
 \section{Spin of the Higgs-boson}
 The most famous particle decaying to two identical vectors is the Higgs boson.
-In order to validate out approach we performed analysis of the reaction $H\to Z(\mu^+\mu^-)Z(e^+e^-)$.
+In order to validate out approach we performed analysis of the reaction $H\to Z(\mu^+\mu^-)Z(\mu^+\mu^-)$.
 % A sample of $500$ events was generated using the MadGraph.
 The interaction vertex of Higgs with a pair of $Z^0$ bosons is $2i m_Z^2/v\,g^{\mu\nu}$,
 hence the helicity amplitude reads:
@@ -239,16 +270,19 @@ hence the helicity amplitude reads:
 Using the explicit expressions for the polarization $\epsilon$ vectors,
 we find a special case of the matrix for group-$\I$,
 \begin{equation}
-  H \sim \begin{pmatrix}
-    1 & &\\
-    & 1+\frac{2p^2}{m^2} &\\
-    & & 1
-\end{pmatrix}
+  H^{H\to ZZ} = \frac{\mathbb{I}}{\sqrt{3}} + O(p^2)
 \end{equation}
+% \begin{equation}
+%   H \sim \begin{pmatrix}
+%     1 & &\\
+%     & 1 &\\
+%     & & 1
+% \end{pmatrix} + O(p^2)
+% \end{equation}
 The matrix is proportional to identity (S-wave) close to the nominal $ZZ$ production threshold,
-the contribution of the $D$-wave is given by $p^2/m^2$.
- % is proportional to identity close to the production threshold, $, i.e. $b=d=1/\sqrt{3}$ in .
+the contribution of the $D$-wave is suppressed by $|\vec p\,|^2/m_Z^2$.
 
+% is proportional to identity close to the production threshold, $, i.e. $b=d=1/\sqrt{3}$ in .
 % The Standard Model on the tree level predicts a simple coupling of the Higgs to a pair of $Z^0$ bosons.
 % \begin{equation}
 %   \mathcal{L}_{HZZ} = \frac{1}{2}m_Z^2 Z^\mu Z_\mu \frac{}{})
@@ -256,16 +290,16 @@ the contribution of the $D$-wave is given by $p^2/m^2$.
 
 \section{How the fit distinguishes hypothesis}
 
-Distribution over $\phi$ angle once $\theta_1$ are $\theta_2$ are integrated:
+Distribution over $\Delta\phi$ angle once $\theta_1$ are $\theta_2$ are integrated:
 \begin{align}
-  \frac{2\pi}{N}\frac{\diff N}{\diff \phi} = 1
-   + \frac{h_{1,1} h_{-1,-1}^*}{2} \cos(2 \phi),
+  \frac{2\pi}{N}\frac{\diff N}{\diff \Delta\phi} = 1
+   + \frac{h_{1,1} h_{-1,-1}^*}{2} \cos(2 \Delta\phi),
 \end{align}
-The sign of the $\cos(2\phi)$ component depends on $J^P$: it is positive for quantum numbers of the first group, and negative for the ones in the second group.
-The decays from the third and fourth groups do not show $2\phi$ dependence.
-This sing can be determined by either fitting $\phi$ spectra, or calculating $\cos(2\phi)$ moment,
+The sign of the $\cos(2\Delta\phi)$ component depends on $J^P$: it is positive for quantum numbers of the first group, and negative for the ones in the second group.
+The decays from the third and fourth groups do not show $2\Delta\phi$ dependence.
+This sing can be determined by either fitting $\Delta\phi$ spectra, or calculating $\cos(2\Delta\phi)$ moment,
 \begin{equation}
-  M_{\cos(2\phi)} = \frac{1}{N_D}\sum_{e=1}^{N_D} \cos(2\phi_e).
+  M_{\cos(2\Delta\phi)} = \frac{1}{N_D}\sum_{e=1}^{N_D} \cos(2\Delta\phi_e).
 \end{equation}
 
 Useful relations for $\cos\theta$ integrals
@@ -276,8 +310,6 @@ Useful relations for $\cos\theta$ integrals
   % 3 \sum_{\xi}^{\{-1,1\}} \int_{0}^{1} \diff \cos\,\theta d_{\lambda,\xi}^{1}(\theta) d_{\lambda',\xi}^{1}(\theta) =
   % \frac{1}{2}\begin{pmatrix}2 & -\frac{1}{\sqrt{2}} & 1\\-\frac{1}{\sqrt{2}} & 2 & \frac{1}{\sqrt{2}}\\1 & \frac{1}{\sqrt{2}} & 2\end{pmatrix}_{\lambda\lambda'},\\
   %
-  3 \int_{-1}^{1} \diff \cos\,\theta d_{\lambda,0}^{1}(\theta) d_{\lambda',0}^{1}(\theta) =
-  \begin{pmatrix}1 & 0 & -1\\0 & 1 & 0\\-1 & 0 & 1\end{pmatrix}_{\lambda\lambda'},\\
 \end{align}
 
 \begin{figure}
@@ -287,12 +319,18 @@ Useful relations for $\cos\theta$ integrals
 \end{figure}
 
 \section*{Acknowledgement}
-The project was motivated by discussion in the LHCb Amplitude Analysis group.
-Especially we thank Biplab Day for organizing seminar dedicated to $X\to VV$.
-We gratefully acknowledge Alessandro Pilloni for useful comments on the work.
+The project was motivated by a discussion in the LHCb Amplitude Analysis group.
+We thank Biplab Day for organizing seminar dedicated to $X\to VV$.
+We would like to gratefully thank Alessandro Pilloni for useful comments on the work.
 We thank Liupan An and Ronan McNulty for finding practical cases for the analysis.
 
 \appendix
+
+\section{Corrections for $X\to V(K^+K^-)V(K^+K^-)$}
+\begin{align}
+  3 \int_{-1}^{1} \diff \cos\,\theta d_{\lambda,0}^{1}(\theta) d_{\lambda',0}^{1}(\theta) =
+  \begin{pmatrix}1 & 0 & -1\\0 & 1 & 0\\-1 & 0 & 1\end{pmatrix}_{\lambda\lambda'}.
+\end{align}
 
 \section{Polarization vectors}
 
@@ -305,10 +343,10 @@ we used explicit expressions for the polarization vectors:
 where $E$, $p$, and $m_Z$ are the energy, momentum, and the mass of the $Z$ boson.
 The general expressions for the rotational vectors follows:
 \begin{align}
-  % \epsilon_1(\pm1) &= R_z(\phi) R_y(\theta) (0,-i,\mp 1,0)\frac{1}{\sqrt{2}},\\
-  % \epsilon_2(\pm1) &= R_z(\phi) R_y(\theta) R_y(\pi) (0,-i,\mp 1,0)\frac{1}{\sqrt{2}};\\
-  % \epsilon_1(0) &= R_z(\phi) R_y(\theta) (-p,0,0,E)\frac{1}{m},\\
-  % \epsilon_2(0) &= (-1) R_z(\phi) R_y(\theta) R_y(\pi) (-p,0,0,E)\frac{1}{m},
+  % \epsilon_1(\pm1) &= R_z(\Delta\phi) R_y(\theta) (0,-i,\mp 1,0)\frac{1}{\sqrt{2}},\\
+  % \epsilon_2(\pm1) &= R_z(\Delta\phi) R_y(\theta) R_y(\pi) (0,-i,\mp 1,0)\frac{1}{\sqrt{2}};\\
+  % \epsilon_1(0) &= R_z(\Delta\phi) R_y(\theta) (-p,0,0,E)\frac{1}{m},\\
+  % \epsilon_2(0) &= (-1) R_z(\Delta\phi) R_y(\theta) R_y(\pi) (-p,0,0,E)\frac{1}{m},
   \epsilon_1(\lambda) &= R_z(\phi) R_y(\theta) \epsilon_z(\lambda),\\
   \epsilon_2(\lambda) &= (-1)^{1-\lambda} R_z(\phi) R_y(\theta) R_y(\pi) \epsilon_z(\lambda),\\
 \end{align}
@@ -329,7 +367,7 @@ $(-1)^{1-\lambda_2}$ that adds an extra sign to the vector $\epsilon_2(0)$.
 The intensity reads:
 \begin{align}
   I(H) &= \frac{s^{2} \eta^{2} \sin^{2}{\left (\theta_{1} \right )} \cos^{2}{\left (\theta_{2} \right )}}{2} + \frac{s^{2} \eta^{2} \sin^{2}{\left (\theta_{1} \right )}}{2} + \frac{s^{2} \sin^{2}{\left (\theta_{1} \right )} \cos^{2}{\left (\theta_{2} \right )}}{2} + \frac{s^{2} \sin^{2}{\left (\theta_{1} \right )}}{2} \\ \nonumber
-   &\quad + \frac{s \eta \left(\cos{\left (- 2 \theta_{1} + 2 \theta_{2} + \phi \right )} + \cos{\left (2 \theta_{1} - 2 \theta_{2} + \phi \right )} - \cos{\left (2 \theta_{1} + 2 \theta_{2} - \phi \right )} - \cos{\left (2 \theta_{1} + 2 \theta_{2} + \phi \right )}\right)}{8}\\ \nonumber
+   &\quad + \frac{s \eta \left(\cos{\left (- 2 \theta_{1} + 2 \theta_{2} + \Delta\phi \right )} + \cos{\left (2 \theta_{1} - 2 \theta_{2} + \Delta\phi \right )} - \cos{\left (2 \theta_{1} + 2 \theta_{2} - \Delta\phi \right )} - \cos{\left (2 \theta_{1} + 2 \theta_{2} + \Delta\phi \right )}\right)}{8}\\ \nonumber
    &\quad+\frac{\eta^{2} \sin^{2}{\left (\theta_{2} \right )} \cos^{2}{\left (\theta_{1} \right )}}{2} + \frac{\eta^{2} \sin^{2}{\left (\theta_{2} \right )}}{2} + \frac{\sin^{2}{\left (\theta_{2} \right )} \cos^{2}{\left (\theta_{1} \right )}}{2} + \frac{\sin^{2}{\left (\theta_{2} \right )}}{2}
 \end{align}
 The expression does not change under flip of $\eta$ and $s$ sign simultaneously.
@@ -368,7 +406,7 @@ Hence the group-$\III$ cannot be distinguished from the group-$\II$.
 
 % \begin{figure}
 %   \includegraphics[width=0.46\textwidth]{../plots/moment_M2phi_Nev=500.pdf}
-%   \caption{Distribution of $M_{\cos(2\phi)}$ for a sample of random coupling constants.
+%   \caption{Distribution of $M_{\cos(2\Delta\phi)}$ for a sample of random coupling constants.
 %   A sample of $500$ events is generated for every hypothesis of couplings.}
 %   \label{}
 % \end{figure}
