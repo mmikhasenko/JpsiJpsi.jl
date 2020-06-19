@@ -39,7 +39,7 @@ S1_t = sample(1000; H = Diagonal(fill(1/sqrt(3),3)))
 
 let Nbins=15
     Nev = length(S1_t)
-    plot(size=(500,350), xlab="ϕ", ylab="# events", xlim=(-π, π))
+    plot(size=(500,350), xlab="Δϕ", ylab="# events", xlim=(-π, π), leg=:top)
     [plot!(ϕ->f(ϕ) * (Nev/Nbins*(2π)), -π, π, lab=lab) for (f,lab) in fs]
     errorhist!(getproperty.(S1_t, :ϕ), bins=range(-π,π, length=Nbins+1), seriescolor=:black, lab="data")
 end
