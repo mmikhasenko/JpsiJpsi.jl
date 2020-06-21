@@ -22,6 +22,7 @@ nofootinbib,superscriptaddress]{revtex4}
 \usepackage{epsfig}
 \usepackage{slashed}
 \usepackage{color}
+\usepackage{todonotes}
 
 
 \newcommand{\diff}{\mathrm{d}}
@@ -36,6 +37,8 @@ nofootinbib,superscriptaddress]{revtex4}
 \newcommand{\II}{\ensuremath{{I\!I}}}
 \newcommand{\III}{\ensuremath{{I\!I\!I}}}
 \newcommand{\IV}{\ensuremath{{I\!V}}}
+
+\graphicspath{{../plots/}{figs/}}
 
 \begin{document}
 \title{Parity and signature test for the vector-vector system (revisited)}
@@ -53,9 +56,9 @@ nofootinbib,superscriptaddress]{revtex4}
 %%%%%%%%%%
 \begin{abstract}
   We present a construction of the reaction amplitude
-  for inclusive production of the resonance decaying to a pair of identical vectors, as $J/\psi J/\psi$, $\phi\phi$, $Z^0 Z^0$.
-  The method provides possibility to determine the spin and parity of the resonance in the model-independent way.
-  The test of the quantum-number hypotheses is demonstrated on the Standard Model decay of the Higgs particle to four leptons.
+  for inclusive production of a resonance decaying to a pair of identical vector particles such as $J/\psi J/\psi$, $\phi\phi$, $Z^0 Z^0$.
+  The method provides possibility of determining the spin and parity of a resonance in a model-independent way.
+  A test of the methodology is demonstrated using the Standard Model decay of the Higgs boson to four leptons.
 \end{abstract}
 %%%%%%%%%%
 
@@ -66,42 +69,50 @@ nofootinbib,superscriptaddress]{revtex4}
 \definecolor{colb}{rgb}{0.337, 0.706, 0.914 }
 \definecolor{colc}{rgb}{0.0, 0.62, 0.451}
 %
+\newcommand{\mishatodo}[1]{\todo[inline,backgroundcolor=colb!50!white]{\textbf{Misha:} #1}}
+\newcommand{\misha}[1]{{\color{colb} \textit{Misha:} #1}\xspace}
+%
+
 \section{Introduction}
 
-Formation of the hadronic matter is one of a few ununderstood parts of Quantum Chromodynamics (QCD) leaving a little black spot in the Standard Model.
-Despite the fact that QCD is the fundamental theory of strong interaction,
-the theory degrees of freedom change at the low energy where hadronic phenomena emerges.
-Whilst the constituent quark model successfully describes the majority of the observed hadronic states, not all.
-Over the last decade we have witnessed overwhelming evidence of unexpected phenomena beyond the quark model that
-includes the observation of $XYZ$ states in the charminium spectrum~\cite{Godfrey:2008nc}, the pentaquark states~\cite{Aaij:2015tga,Aaij:2019vzc},
-as well as the resonance-like phenomena of the hadron rescattering singularizes~\cite{Alexeev:2020lvq}.
+Formation of the hadronic matter is the one of a few poorly understood parts of Quantum Chromodynamics (QCD) leaving a little black spot in the Standard Model.
+While the QCD is the fundamental theory of strong interaction,
+it operates with the other degrees of freedom that those at low energy where hadronic phenomena emerge.
+The constituent quark model successfully describes the majority of observed hadronic states, however, far not all.
+Over the last decade we have witnessed overwhelming evidence of unexpected phenomena beyond the constituent quark model that
+include the observation of $XYZ$ states in the charmonium spectrum~\cite{Godfrey:2008nc}, pentaquark states~\cite{Aaij:2015tga,Aaij:2019vzc},
+as well as resonance-like phenomena from the triangle singularity in hadron scattering~\cite{Alexeev:2020lvq}.
 The spin-parity of the observed exotica is a critical part of the formation puzzle, and moreover, in most of the cases it can be determined experimentally.
-Nevertheless, the separation of the spin hypothesis is often rather cumbersome and requires case-by-case treatment.
-In the paper we revisit the problem of the spin-parity assignment for the system two identical vectors with their possible further decay.
+Nevertheless, the separation of the different hypothesis is often rather cumbersome and requires case-by-case treatment.
+In the paper we revisit the problem of the spin-parity assignment for the system of two identical vectors with their possible further decay.
 
 We anticipate three applications of the presented framework.
-First, the fresh observation of the threshold enhancement in the $J/\psi J/\psi$ spectrum~\cite{Aaij:2020xyz}
-that might lead to a new milestone in the understanding of the hadron formation through the mechanism for binding four charm quarks~\cite{Liu:2019zoy}.
-Second, the $\phi\phi$ pairs produced in central exclusive reactions hint a resonance signal, that is a candidate for a tensor glueball~\cite{Barberis:2000em,Lebiedowicz:2019jru}.
-The proposed approach sets the ground for the complete partial wave analysis of the high statistics $pp\to pp\,K^+K^-K^+K^-$ that
-should be possible with the modern LHC data.
+First, to facilitate future studies of the resonance-like structures in the $J/\psi J/\psi$ spectrum
+just released by LHCb~\cite{Aaij:2020xyz}.
+The knowledge of quantum numbers will helping to understand the mechanism for binding of four charm quarks~\cite{Liu:2019zoy}.
+% Once confirmed, the discovery sets the new milestone in the understanding of the hadron formation through the mechanism for binding four charm quarks~\cite{Liu:2019zoy}.
+Second, to investigate central exclusive production (CEP) of the vector-meson pairs.
+The data of the WA102 experiment on the production of $\phi\phi$ pairs
+hint at a resonance signal, that is a candidate for a tensor glueball~\cite{Barberis:2000em,Lebiedowicz:2019jru}.
+The proposed approach sets the ground for the complete partial wave analysis of the high statistics CEP production of four scalar mesons that should be possible with modern LHC data.
 Thirdly, one find the same vector-vector signature in the Standard Model (SM) decay of the Higgs boson, $H\to Z^0Z^0$.
-To conclude in favor of $0^+$ hypothesis for the spin-parity of the Higgs boson
-several phenomenological models were compared on the combined dataset of several decay channels~\cite{Aad:2013xqa,CMS:2018mmw}.
-In contrast, we discuss the anatomy of the assumption-free approach.
+To conclude in favor of the $0^+$ hypothesis in Ref.~\cite{Aad:2013xqa,CMS:2018mmw}
+% for the spin-parity of the Higgs boson
+several phenomenological models were compared using the combined dataset of several decay channels.
+In contrast, here we discuss the anatomy of the assumption-free approach.
 
-The two key constraints that determine the properties of the decay are the parity conservation and the permutation symmetry.
+The two key constraints that determine the properties of the decay are parity conservation and permutation symmetry.
 One consequence of these constraints is known as the Landau-Yang theorem~\cite{Yang:1950rg,Landau:1948kw}.
 The theorem states that a massive boson with $J^P = 1^\pm$ cannot decay into two on-shell photons.
-The statement follows naturally from the general equations we provide. Moreover, the extension of the selection rule to all the natural quantum numbers with odd spin is easily obtained.
-A parity-signature test of a signal in $\phi\phi$ system have been discussed in the past by several authors~\cite{Trueman:1978kh,Chang:1978jb,Collins:1977iv,Trueman:1978kh,Trueman:1978kh}.
-We derive the results consistent with the previous works using the modern conventions on the state vectors and rotation matrices.
+The statement follows naturally from the general equations we provide. Moreover, the extension of the selection rule to all natural quantum numbers with odd spin is easily obtained.
+A parity-signature test of a signal in the $\phi\phi$ system have been discussed in the past by several authors~\cite{Chang:1978jb,Collins:1977iv,Trueman:1978kh,Trueman:1978kh}.
+We derive results consistent with the previous works using modern conventions on the state vectors and rotation matrices.
 Also, we suggest exploring the spin-parity hypothesis using the full power of the multidimensional test statistics.
 
 The paper is organized as follows. The reaction amplitude is presented in Sec.~\ref{sec:reaction.amplitude}.
 In Sec.~\ref{sec:symmetries} we discuss the symmetry constraints.
-We describe the test-statistics discriminator in Sec.~\ref{sec:test.statistics}.
-The method is demonstrated on the SM Higgs decay in Sec.~\ref{sec:higgs}.
+We describe the test-statistics discriminator in Sec.~\ref{sec:test.statistics},
+and we demonstrate the method on the SM Higgs decay in Sec.~\ref{sec:higgs}.
 
 %                                      _|  _|    _|                      _|
 %    _|_|_|  _|_|_|  _|_|    _|_|_|    _|      _|_|_|_|  _|    _|    _|_|_|    _|_|
@@ -113,16 +124,16 @@ The method is demonstrated on the SM Higgs decay in Sec.~\ref{sec:higgs}.
 
 \section{Angular amplitude} \label{sec:reaction.amplitude}
 We focus on an inclusive production process $p p'\to X + \dots$, where $X$ is a resonance decaying to two vector mesons.
-Despite the vectors are identical, it is convenient to distinguish them in the reaction amplitude calling them $V_1$ and $V_2$.
+Despite the vectors being identical, it is convenient to distinguish them in the reaction amplitude calling them $V_1$ and $V_2$.
 In that way, we can make sure that the amplitude is symmetric on the permutation of indices $1$ and $2$.
 
 The production frame is set up in the rest frame of $X$ as a plane that contains three-vectors of the
-production reaction, i.e. $\vec p$, and $\vec p'$. The normal to the plane gives $y$ axis (precisely $\vec p\,'\times \vec p$) as shown in Fig.~\ref{fig:production}.
-We use the Gottfried-Jackson (GJ) frame for defining in the $x$ and $z$ axis in the production plane~\cite{Gottfried:1964nx}.
-We note that the choice of $x$ and $z$ axes is not unique, two other two common definition of the production frame are the helicity (HX) frame
-defined by the direction of motion of $X$ itself in the lab frame, and the Collins-Soper (CS) frame where $z$ is defined by bisection of the angle between $\vec p$ and $\vec p\,'$~\cite{Faccioli:2010kd}.
+production reaction, i.e. $\vec p$, and $\vec p'$. The normal to the plane gives the $y$ axis (precisely $\vec p\,'\times \vec p$) as shown in Fig.~\ref{fig:production}.
+We use the Gottfried-Jackson (GJ) frame for defining the $x$ and $z$ axis in the production plane~\cite{Gottfried:1964nx}.
+We note that the choice of $x$ and $z$ axes is not unique: two other two common definition of the production frame are the helicity (HX) frame
+defined by the direction of motion of $X$ itself in the lab frame, and the Collins-Soper (CS) frame where $z$ is defined by the bisector of the angle between $\vec p$ and $\vec p\,'$~\cite{Faccioli:2010kd}.
 \begin{figure}
-  \includegraphics[width=0.6\textwidth]{../plots/production_GJ.pdf}
+  \includegraphics[width=0.6\textwidth]{production_GJ.pdf}
   \caption{Schematic view of production kinematics of $X$ state at the $pp$ collider.
   The Gottfried-Jackson frame is used for describing production kinematics.
   It is defined in the rest frame of $X$ by the vectors of the beam particles:
@@ -134,22 +145,21 @@ defined by the direction of motion of $X$ itself in the lab frame, and the Colli
   \label{fig:production}
 \end{figure}
 
-We consider a general case of arbitrary polarization of $X$.
+We consider the general case of arbitrary polarization of $X$.
 We note that a negligibly small polarization is measured in the prompt production of charmonium ("head on" collisions)~\cite{Aaij:2013nlm,Chatrchyan:2012woa,CDF:2011ag, Aaij:2013oxa,Sirunyan:2018bfd}.
-In opposite, for the peripheral processes, e.g. central exclusive production (CEP) a significant polarization is expected~\cite{Pasechnik:2010pq}.
+In opposite, for peripheral processes, e.g. central exclusive production, a significant polarization is expected~\cite{Pasechnik:2010pq}.
 % For numerical tests however we restrict ourselves to the unpolarized case.
 
-The full kinematics of the decay is described by 6 angles: a pair of sperical angles $(\theta,\phi)$ of the momentum of $V_1$ in the GJ frame, and two pairs of the spherical angles $(\theta_i,\phi_i)$, $i=1,2$
-for the decays of the vector mesons in their own helicity frames.
-We note that the angles $\phi_i$ can also be defined in the $X$ rest frame as shown in Fig.~\ref{fig:decay} since they are not effected by the boosts along the vector-meson directions of momentum.
+The full kinematics of the decay is described by 6 angles: a pair of spherical angles $(\theta,\phi)$ of the momentum of $V_1$ in the GJ frame, and two pairs of spherical angles $(\theta_i,\phi_i)$, $i=1,2$ for the decays of the vector mesons in their own helicity frames.
+We note that the angles $\phi_i$ can also be defined in the $X$ rest frame as shown in Fig.~\ref{fig:decay} since they are not affected by the boosts along the vector-meson directions of momentum.
 
 The spin of the decay particle $X$ defines rotational properties of the system of the decay products~\cite{Mikhasenko:2019rjf}.
 Every configuration of the three-momenta of the final-state particles in the $X$ rest frame
 can be considered as a solid body for which the orientation is described by three angles:
-the pair of the spherical angles $(\theta,\phi)$ describe the direction of $\vec p_{V_1}$,
-the third angle $\phi_1$ is the azimuthal direction of $\mu^+$ (see Fig.~\ref{fig:production} and Fig.~\ref{fig:decay}).
-For the sake of certainty, we consider the decay $X\to V(\mu^+\mu^-)V(\mu^+\mu^-)$
-in the main text. A mild modification one needs to implement for $X\to V(K^+K^-)V(K^+K^-)$ are given in Appendix~\ref{sec:KKKK}.
+the pair of spherical angles $(\theta,\phi)$ that describe the direction of $\vec p_{V_1}$,
+and $\phi_1$, the azimuthal direction of $\mu^+$ (see Fig.~\ref{fig:production} and Fig.~\ref{fig:decay}).
+For definiteness, we consider the decay $X\to V(\mu^+\mu^-)V(\mu^+\mu^-)$
+in the main text. A mild modifications that one needs to implement for vector decays to scalars $X\to V(S^+S^-)V(S^+S^-)$ are given in Appendix~\ref{sec:KKKK}.
 The normalized differential cross section denoted by the intensity $I$ reads:
 % The intensity of the decay is defined as a differential cross section over angular variables,
 % $I = \diff \sigma / \diff \Omega\,\diff \Omega_1\,\diff \Omega_2$, where
@@ -158,15 +168,15 @@ The normalized differential cross section denoted by the intensity $I$ reads:
 % The intensity reads:
 \begin{align}
     I(\Omega,\Omega_1,\Omega_2) &= (2J+1) \sum_{M,M'}R_{M,M'}\,
-    D_{M,\nu}^{J}(\phi,\theta,\phi_1) D_{M',\nu'}^{J*}(\phi,\theta,\phi_1)
+    \sum_{\nu,\nu'}D_{M,\nu}^{J}(\phi,\theta,\phi_1) D_{M',\nu'}^{J*}(\phi,\theta,\phi_1)
     \sum_{\xi_1,\xi_2}^{\{-1,1\}}
-    A^{\nu}_{\xi_1,\xi_2}(\Omega_1,\Omega_2) A^{\nu'*}_{\xi_1,\xi_2}(\Omega_1,\Omega_2),
+    A^{\nu}_{\xi_1,\xi_2}(\theta_1,\theta_2,\Delta\phi) A^{\nu'*}_{\xi_1,\xi_2}(\theta_1,\theta_2,\Delta\phi),
 \end{align}
-where we have explicitly separated the production and decay part of the amplitude.
-The production dynamics is encapsulated into the polarization matrix $R_{M,M'}$.
+where we have explicitly separated the production and decay parts of the amplitude.
+The production dynamics are encapsulated in the polarization matrix $R_{M,M'}$.
 The decay amplitude is denoted by $A^{\nu}_{\xi_1,\xi_2}$
-with $\nu$ being the difference of the vector-meson's helicities, and $\xi$ being the difference of the muon's helicities. $J$ and $M$ are the spin and the spin projection of the $X$.
-The decay amplitude is described by the remaining three angles: $\theta_1$, $\theta_2$, and $\Delta\phi = \phi_2-\phi_1$ (see Fig.~\ref{fig:decay}).
+with $\nu$ being the difference of the vector-meson's helicities, and $\xi$ being the difference of the muon's helicities. $J$ and $M$ are the spin of $X$ and it's spin projection onto the $z$ axis.
+The decay amplitude is described by the remaining three angles: $\theta_1$, $\theta_2$, and $\Delta\phi = \phi_2+\phi_1$ (see Fig.~\ref{fig:decay}).
 % ,$I_0$ is the total integrated intensity
 % We used the angle $\phi_1$ as the third Euler angle for the orientation of
 % the solid body of the decay products vectors~\cite{Mikhasenko:2019rjf}. With this choice the
@@ -184,9 +194,9 @@ The factor $(-1)^{1-\lambda_2}$ is related to the Jacob-Wick particle-2 phase co
 Once the phase is factored out of the helicity coupling matrix $H_{\lambda_1,\lambda_2}$,
 the symmetry relations for $H$ are significantly simpler as presented in the next section.
 \begin{figure}
-  \includegraphics[width=0.8\textwidth]{../plots/angles.pdf}
+  \includegraphics[width=0.8\textwidth]{angles.pdf}
   \caption{Schematic view of the $X\to V(\mu^+\mu^-)\,V(\mu^+\mu^-)$ decay kinematics.
-  The central three planes show orientation of vectors in the $X$ rest frame.
+  The central three planes show the orientation of the vector mesons in the $X$ rest frame.
   The right and left most planes show the decay angles of $J/\psi_1$ and $J/\psi_2$ in the rest frame, respectively.
   % The black arrows shows three dimensional vectors of particles.
   % A shaped arrow gives the direction of polarization of $X$.
@@ -223,11 +233,11 @@ The matrix of the helicity couplings is strictly defined by
 \begin{equation} \label{eq:helicity.def}
   H_{\lambda_1,\lambda_2} = \bra{JM;\lambda_1,\lambda_2}\hat{T}\ket{JM},
 \end{equation}
-where the bra-state is the protected two-particle state in the particle-2 convention,
-the ket-state is the decaying state with the defined spin $J$ and the spin projection to the $z$ axis in the GJ frame, $M$~\cite{Martin:1970xx,Collins:1977jy}.
+where the bra-state is the projected two-particle state in the particle-2 phase convention,
+the ket-state is the decaying state with the defined $J$ and $M$ in the GJ frame~\cite{Martin:1970xx,Collins:1977jy}.
 The elements of the helicity matrix are, in general, arbitrary complex numbers.
 However, the matrix is constrained by parity and permutation symmetry.
-The parity transformation relates the opposite values of the vectors' helicities:
+Parity transformation relates the opposite values of the vectors' helicities:
 \begin{equation} \label{eq:parity}
 H_{\lambda_1,\lambda_2} = P (-1)^J H_{-\lambda_1,-\lambda_2},
 \end{equation}
@@ -236,10 +246,10 @@ The identity of the vector mesons relates the helicity matrix with the transpose
 \begin{equation} \label{eq:permutation}
 H_{\lambda_1,\lambda_2} = (-1)^J H_{\lambda_2,\lambda_1},
 \end{equation}
-The matrices of the helicity couplings are symmetric (anti-symmetric) for the even (odd) spin (spin) $J$.
+The matrices of the helicity couplings are symmetric (anti-symmetric) for even (odd) spin $J$.
 Combining the two symmetries we split all possible quantum numbers $J^P$ into four groups as shown in Tab.~\ref{tab:couplings}.
 \begin{table}
-  \caption{Possible quantum numbers of the decaying particle $X$ separated to four groups with respect of symmetry of the helicity matrix. The framed quantum numbers in the last column have additional restrictions due to the maximal value of the spin projection.}
+  \caption{Possible quantum numbers of the decaying particle $X$ separated into four groups with respect to the symmetry of the helicity matrix. The framed quantum numbers in the last column have additional restrictions due to the maximal value of the spin projection.}
   \label{tab:couplings}
   \begin{ruledtabular}
   \begin{tabular}{c | r | r | l}
@@ -257,39 +267,39 @@ The relations Eq.~\eqref{eq:parity} and Eq.~\eqref{eq:permutation} greatly reduc
     b & a & c\\
     a & d & a\\
     c & a & b
-  \end{pmatrix}_S&
+  \end{pmatrix}_S;&
   H_\II&=\begin{pmatrix}
     b & a &  \\
     a &   & -a\\
       & -a & -b
-  \end{pmatrix}_S&
+  \end{pmatrix}_S;&
   H_{\III}&=\begin{pmatrix}
       & a &  \\
     -a &   & -a\\
       & a &
-  \end{pmatrix}_A&
+  \end{pmatrix}_A;&
   H_{\IV}&=\begin{pmatrix}
       & a & c\\
     -a &   & a\\
     -c & -a &
-  \end{pmatrix}_A
+  \end{pmatrix}_A.
 \end{align}
-There are three special cases, $0^+$ of the first group for which $a=c=0$,
+There are three special cases: $0^+$ of the first group for which $a=c=0$,
 $0^-$ in the second group with $a=0$, and $1^+$ in the forth group with $c=0$.
-One finds that the helicity matrices are orthogonal to each other,
+The helicity matrices are orthogonal to each other,
 with the scaler product defined by $(H_1\cdot H_2) = \mathrm{Tr}(H_1 H_2^\dagger)$.
 The four groups produce generally different angular distribution
-except a few generate cases discussed in Appendix~\ref{sec:Ps.invariance}.
+except a few degenerate cases discussed in Appendix~\ref{sec:Ps.invariance}.
 
 The form of the helicity matrices in Eq.~\eqref{eq:matrices} immediately leads to the
 conclusion of the Landau-Yang theorem~\cite{Yang:1950rg,Landau:1948kw}.
 For the decay of $X$ to a pair of the real photons,
 $H_{0,\lambda} = H_{\lambda,0} = 0$, as the photon cannot carry the longitudinal polarization, $\lambda=0$.
-Practically, one must cross the second row and the second column of the helicity matrix.
-The matrix of the group-$\III$ completely vanishes, there are no helicity couplings
-that the decay can process with. Hence, the mesons with the odd-natural $J^P$ quantum number
-cannot decay to two real photons.
-The special case of group-$\IV$ with $c=0$ vanishes as well making the decay of $J^P=1^+$ to two real photons forbidden.
+Practically, this corresponds to setting to zero the second row and second column of the helicity matrix.
+The matrix of the group-$\III$ completely vanishes,
+% , - there are no helicity couplings
+% that the decay can process with.
+hence, the mesons with odd-natural $J^P$ cannot decay to two real photons. The special case of group-$\IV$ with $c=0$ vanishes as well making the decay of $J^P=1^+$ to two real photons forbidden.
 
 %
 %    _|                            _|
@@ -302,24 +312,25 @@ The special case of group-$\IV$ with $c=0$ vanishes as well making the decay of 
 \section{Testing hypothesis} \label{sec:test.statistics}
 % \section{Test statistics}
 The most powerful method for testing spin hypothesis is the multidimensional fit.
-For simplicity we consider the case of the negligible polarization in three dimensions, while all discussion is easy to generalize to the five dimensional case that includes
-the polarization degrees of freedom.
+For simplicity we consider an analysis in three dimensions such that the dependence on polarization vanishes. We note, however, that the discussion can be generalized to the full six-dimensional space treating the polarization degrees as the model parameters.
+Using the properties of the Wigner D-function, and normalization of
+the polarization matrix, $\mathrm{Tr}\,R = 1$, we find:
+\begin{equation} \label{eq:intensity.3}
+  I(\tau|h) = \int \frac{\diff \Omega\,\diff \phi_1}{8\pi^2} I(\Omega,\Omega_1,\Omega_2) =
+  \sum_{\nu,\xi_1,\xi_2} |A^{\nu}_{\xi_1,\xi_2}(\theta_1,\theta_2,\Delta\phi)|^2,
+\end{equation}
+where $\tau$ is a set of kinematic varables, $\tau = (\theta_1,\theta_2,\Delta\phi)$,
+$h$ stands for the model parameters, i.e. elements of the helicity matrix.
 The test statistics is defined by
 \begin{align} \label{eq:test.statistics}
   \TS_{M/M'} = \LLH_M - \LLH_{M'},
-\end{align},
+\end{align}
 where the $\LLH_M$ is the maximized value of the log likelihood over the set of helicity couplings.
 \begin{equation} \label{eq:likelihood}
   \LLH_M = \frac{1}{N_\mathrm{ev}} \sum_{e=1}^{N_\mathrm{ev}} \log I(\tau_e|M\{\hat{h}\}).
 \end{equation}
-The intensity $I(\tau_e|\hat{c})$ is calculated for the kinematic variables of the event $e$.
+The intensity $I(\tau_e|\hat{c})$ is calculated for the kinematic variables of event $e$.
 The optimized model parameters are demoted by $\hat{h}$. We use a convenient normalization condition $\mathrm{Tr}(HH^\dagger) = 1$.
-% Normalization for the fitted density is established using the relation,
-% \begin{align}
-%   \int I(\theta_1,\theta_2,\Delta\phi)\,\frac{\diff\cos\theta_1\,\diff\cos\theta_2\,\diff \Delta\phi}{8\pi} = N \sum_{\lambda_1,\lambda_2} |H_{\lambda_1\lambda_2}|^2.
-% \end{align}
-% Fig.~\ref{fig:TS.fixedH} shows an example of the test-statistics distribution obtained on the statistical sample of the fixed group-\III coupling matrix.
-
 %
 %            _|        _|
 %  _|_|_|    _|_|_|
@@ -328,13 +339,19 @@ The optimized model parameters are demoted by $\hat{h}$. We use a convenient nor
 %  _|_|_|    _|    _|  _|
 %  _|
 %  _|
-Distribution over $\Delta\phi$ angle once $\theta_1$ are $\theta_2$ are integrated:
+
+In order to understand why the likelihood method is capable of separating spin-parity groups,
+we look at the one-dimensional distributions.
+Integrating the intensity in Eq.~\eqref{eq:intensity.3} over $\cos\theta_1$, $\cos\theta_2$, the distribution over $\Delta\phi$ is given by
+% Integrating the intensity
+% Distribution over $\Delta\phi$ angle once $\theta_1$ are $\theta_2$ are integrated:
 \begin{align}
-  \frac{2\pi}{N}\frac{\diff N}{\diff \Delta\phi} = 1
-   + \frac{h_{1,1} h_{-1,-1}^*}{2} \cos(2 \Delta\phi),
+  I(\Delta\phi) = 1 + \frac{h_{1,1} h_{-1,-1}^*}{2} \cos(2 \Delta\phi).
 \end{align}
-The sign of the $\cos(2\Delta\phi)$ component depends on $J^P$: it is positive for quantum numbers of the first group, and negative for the ones in the second group.
-The decays from the third and fourth groups wound not show any $2\Delta\phi$ dependence.
+The sign of the $\cos(2\Delta\phi)$ component depends on $J^P$: it is positive for quantum numbers of the first group, and negative for those in the second group.
+The decays from the third and fourth groups would not show any $2\Delta\phi$ dependence.
+\mishatodo{Discuss the Fig.4 here}
+\mishatodo{Add $\cos\theta_1$ distribution for $4\mu$.}
 % This sign can be determined by either fitting $\Delta\phi$ spectra, or calculating $\cos(2\Delta\phi)$ moment,
 % \begin{equation}
 %   M_{\cos(2\Delta\phi)} = \frac{1}{N_D}\sum_{e=1}^{N_D} \cos(2\Delta\phi_e).
@@ -359,10 +376,9 @@ The decays from the third and fourth groups wound not show any $2\Delta\phi$ dep
 %                  _|_|      _|_|
 
 \section{Testing the Standard Model Higgs decay} \label{sec:higgs}
-To demonstrate the method
 The most famous particle decaying to two identical vectors is the Higgs boson.
-In order to validate out approach we performed analysis of the reaction $H\to Z(\mu^+\mu^-)Z(\mu^+\mu^-)$.
-The interaction vertex of Higgs with a pair of $Z^0$ bosons is $2i m_Z^2/v\,g^{\mu\nu}$,
+In order to validate out approach we performed an analysis of the reaction $H\to Z(\mu^+\mu^-)Z(\mu^+\mu^-)$.
+The interaction vertex of the Higgs boson with a pair of $Z^0$ bosons is $2i m_Z^2/v\,g^{\mu\nu}$,
 hence the helicity amplitude reads:
 \begin{equation} \label{eq:HZZ}
   A^{H\to ZZ}_{\lambda_1,\lambda_2} = 2i\frac{m_Z^2}{v} (\varepsilon_1^*(\lambda_1)\cdot\varepsilon_2^*(\lambda_2)).
@@ -371,41 +387,45 @@ Using the explicit expressions for the polarization $\varepsilon$ vectors (see A
 \begin{equation} \label{eq:H2ZZ}
   H^{H\to ZZ} = \frac{\mathbb{I}}{\sqrt{3}} + O(p^2)
 \end{equation}
-The matrix is proportional to identity ($S$-wave) close to the nominal $Z^0Z^0$ production threshold,
+The matrix is proportional to the identity matrix ($S$-wave) close to the nominal $Z^0Z^0$ production threshold:
 the contribution of the $D$-wave is suppressed by $|\vec p\,|^2/m_Z^2$.
 
-To test the method presented in Sec.~\ref{sec:test.statistics} a sample of synthetic events
+To test the method presented in Sec.~\ref{sec:test.statistics} a sample of simulated $J^P=0^+$ events
 is generated and fitted by the different hypotheses using a dedicated framework written in \texttt{Julia}~\cite{julia.JpsiJpsi}.
 We find that the hypotheses are sufficiently separated already with $500$ events. %, it was used for the nominal sample size.
-A pool of $500$ samples corresponding to the helicity matrix in Eq.~\eqref{eq:H2ZZ} is fit by all group hypotheses adjusting the couplings $a$, $b$, $c$, $d$ in order to maximize event-based likelihood in Eq.~\eqref{eq:likelihood}.
-This maximal values are histogrammed over the pool and are shown in the right panel of Fig.~\ref{fig:TS.fixedH}.
+A pool of $500$ samples corresponding to the helicity matrix in Eq.~\eqref{eq:H2ZZ} is fit by all group hypotheses adjusting the couplings $a$, $b$, $c$, $d$ in order to maximize the event-based likelihood in Eq.~\eqref{eq:likelihood}.
+The values obtained are histogrammed in the left panel of Fig.~\ref{fig:TS.fixedH}.
 \begin{figure}
-  \includegraphics[width=0.48\textwidth]{../plots/llh_testing_higgs.pdf}
-  \includegraphics[width=0.48\textwidth]{../plots/TS_0p_vs_1m.pdf}
-  \caption{Test statistics distribution testing hypothesis of groups $\I-\IV$ and the special cases on the statistical ensemble of the $500$ events data samples generated based on
-  the fixed group-$\III$ coupling matrix. }
+  \includegraphics[width=0.48\textwidth]{llh_testing_higgs.pdf}
+  \includegraphics[width=0.48\textwidth]{TS_0p_vs_1m.pdf}
+  \caption{The left plot shows the distribution the
+  log-likelihood functions maximized on the simulated samples of the $H\to Z^0(\mu^+\mu^-)Z^0(\mu^+\mu^-)$ decay (the $J^P=0^+$ pool, see the text).
+  The distribution of the test statistics $\TS(0^+|1^-)$ for the $J^P=0^+$ pool and the $J^P=1^-$ pool are drawn on the right plot by orange and green lines, respectively.}
   \label{fig:TS.fixedH}
 \end{figure}
-One sees that the group-$\I$ hypothesis over-performs others in average despite the statistics fluctuations.
-The separation is even larger once the test statistics from Eq.~\eqref{eq:test.statistics} is computed for every sample in the pool.
-The right panel of Fig.~\ref{fig:TS.fixedH} shows the comparison of the group-$\I$ and the selected alterative hypotheses, the group-$\III$.
-The distribution of $\TS_{0^+/1^-}$ over the pool is entirely above zero.
-The test statistics on the $1^-$ generated data is calculated by creating the second pool corresponding to the matrix $H_\III$ with $a = 1/\sqrt{3}$.
-As expected, the $1^-$ hypothesis is found to have the highest likelihood in average over the second pool. The green distribution in right panel of Fig.~\ref{fig:TS.fixedH} is largerly negative. As stressed above, an important part of the separation power comes from the $\Delta\phi$ distribution.
-Fig.~\ref{fig:higgs.phi} an example of $\diff N / \diff \phi$ for the two combined sample of the first pool.
+One sees that the group-$\I$ hypothesis has the highest likelihood in average.
+The separation is even larger once the test statistics from Eq.~\eqref{eq:test.statistics} is computed for each sample.
+The orange distribution on the right panel of Fig.~\ref{fig:TS.fixedH} shows the comparison of the group-$\I$ hypothesis with the selected alterative hypotheses that is taken to be the group-$\III$.
+% The distribution of $\TS_{0^+/1^-}$ over the pool is entirely above zero.
+Test statistics on the $1^-$ generated data, i.e. the green distribution on the right panel of Fig.~\ref{fig:TS.fixedH}, is calculated by creating the second pool corresponding to the matrix $H_\III$ with $a = 1/2$.
+As expected, the $1^-$ hypothesis is found to have the highest likelihood in average over the second pool. The green distribution in right panel of Fig.~\ref{fig:TS.fixedH} is largely negative.
+
+As stressed above, an important part of the separation power comes from the $\Delta\phi$ distribution.
+Fig.~\ref{fig:higgs.phi} an example of $I(\Delta\phi)$ for the two combined sample of the first pool.
 \begin{figure}
-  \includegraphics[width=0.48\textwidth]{../plots/phi_higgs.pdf}
-  \caption{Distribution of the polar angle $\Delta\phi$ for the Higgs decay to $\mu^+\mu^-\mu^+\mu^-$ with $1000$ synthetic events.
+  \includegraphics[width=0.48\textwidth]{phi_higgs.pdf}
+  \caption{The distribution of the polar angle $\Delta\phi$ for the Higgs decay to $\mu^+\mu^-\mu^+\mu^-$ with $1000$ simulated events is labeled by "data".
   The orange line is the expectation curve under the $J^P=0^+$ hypotheses with $b=d=1/\sqrt{3}$.
-  The distribution is expected to be flat if $J$ is odd.
+  The distribution is flat when $J$ is odd.
   The blue line gives an example of the even-unnatural $J^P$ quantum numbers (group-\II).}
   \label{fig:higgs.phi}
 \end{figure}
 
 \section{Conclusion}
 We have derived an amplitude for the hadronic production of two identical vector-meson system in a model-independent framework.
-As resonances lead to the structured angular distributions due to well-definite $J^P$ quantum numbers,
-we show that four groups of $J^P$ separated by the parity of $J$ and the naturality of $J^P$ can be distinguish based on angular distributions.
+For well-definite $J^P$ quantum numbers, angular distributions is inhomogeneous
+and differ depending on the parity of $J$ and the naturality of $J^P$.
+We showed that four groups of $J^P$ can be distinguish based on angular distributions.
 The test-statistics discriminator is proposed.
 The power of the three-dimensional analysis is demonstrated using the Standard Model Higgs decay to a pair of the $Z$ bosons.
 
@@ -413,34 +433,43 @@ The power of the three-dimensional analysis is demonstrated using the Standard M
 The project was motivated by a discussion in the LHCb Amplitude Analysis group.
 We thank Biplab Day for organizing seminar dedicated to $X\to VV$.
 We would like to gratefully thank Alessandro Pilloni for useful comments on the work.
-We thank Liupan An and Ronan McNulty for finding practical cases for the analysis.
+We thank Liupan An and Ronan McNulty for useful discussions and help with the paper draft.
 
 \appendix
 
-\section{Modifications for $X\to V(K^+K^-)V(K^+K^-)$} \label{sec:KKKK}
+\section{Modifications for $X\to V(S^+S^-)V(S^+S^-)$} \label{sec:KKKK}
 
-The only place that requires modification when the $\phi\phi$ system is considered
-is the decay matrix element in Eq.~\eqref{eq:decay.A}:
+The amplitude requires a small modification when a system of four scalar particles is considered,
+e.g. $\phi\phi$ decaying to four kaons.
+The decay matrix element in Eq.~\eqref{eq:decay.A} reads:
 \begin{align}
-  A^{\nu}(\theta_1,\theta_2,\Delta\phi) &= 3
+  A^{\nu}_{4S}(\theta_1,\theta_2,\Delta\phi) &= 3
   \sum_{\lambda_1,\lambda_2}
   \delta_{\nu,\lambda_1-\lambda_2} (-1)^{1-\lambda_2}
   H_{\lambda_1\lambda_2}
   d_{\lambda_1,0}^{1}(\theta_1) d_{\lambda_2,0}^{1}(\theta_2)
   e^{i\lambda_2 \Delta\phi}
 \end{align}
-where the decay $\phi\to K^+K^-$ proceeds in $P$-wave only.
+where the decay $V\to S^+S^-$ proceeds in $P$-wave only.
+As there is no averaging over the final-particles spin,
+the variation in the $\Delta\phi$-dependence is more pronounced.
+\begin{align}
+  I_{4S}(\Delta\phi) = 1
+   + 2 h_{1,1} h_{-1,-1}^* \cos(2 \Delta\phi).
+\end{align}
+% with $N_{4S}$ being the total number of the observed events.
+\mishatodo{Add $\cos\theta_1$ distribution for $4K$.}
 
 \section{Polarization vectors} \label{sec:polarisation.vectors}
 
-To translate a covatiant expression in Eq.~\eqref{eq:HZZ} to helicity amplitude
+To translate a covariant expression in Eq.~\eqref{eq:HZZ} to helicity amplitude
 the explicit expressions for the polarization vectors are used:
 \begin{align}
   \varepsilon_z^{\mu}(\pm1) &= \frac{1}{\sqrt{2}} \left( 0,\mp 1,-i,0 \right), &
   \varepsilon_z^{\mu}(0) &= \frac{1}{m_Z} \left(p,0,0,E\right),
 \end{align}
-where $E$, $p$, and $m_Z$ are the energy, momentum, and the mass of the $Z$ boson.
-The general expressions for the rotational vectors follows:
+where $E$, $p$, and $m_Z$ are the energy, momentum, and mass of the $Z$ boson, respectively.
+The general expressions for the rotational vectors follow:
 \begin{align}
   % \varepsilon_1(\pm1) &= R_z(\Delta\phi) R_y(\theta) (0,-i,\mp 1,0)\frac{1}{\sqrt{2}},\\
   % \varepsilon_2(\pm1) &= R_z(\Delta\phi) R_y(\theta) R_y(\pi) (0,-i,\mp 1,0)\frac{1}{\sqrt{2}};\\
@@ -451,11 +480,11 @@ The general expressions for the rotational vectors follows:
 \end{align}
 where $R_y(\phi)R_y(\theta)$ is a product of the three-dimensional rotation matrices
 that transforms the vector $(0,0,1)$ to the direction $(\sin\theta\cos\phi,\,\sin\theta\sin\phi,\,\cos\theta)$.
-The particle-2 requires additional rotation by $\pi$ about the $y$ axis. We also use the particle-two phase convention,
-$(-1)^{1-\lambda_2}$ that adds an extra sign to the vector $\varepsilon_2(0)$.
+The second particle requires additional rotation by $\pi$ about the $y$ axis.
+We also use the particle-2 phase convention that flips the sign of $\varepsilon_2(0)$.
 
 \section{The $P s$ invariance} \label{sec:Ps.invariance}
-The helicity coupling matrices from different groups in Eq.~\eqref{eq:matrices} do not overlap,
+The helicity coupling matrices from different groups in Eq.~\eqref{eq:matrices} do not overlap;
 moreover, they are all orthogonal to each other.
 Nevertheless, there are potential cases where different hypothesis are not distinguishable.
 An example that demonstrate such degeneracy is the following:
@@ -475,8 +504,8 @@ The intensity of the unpolarized decay can be computed explicitly~\cite{SymPy}:
    &\quad+\frac{P^{2} \sin^{2}{\left (\theta_{2} \right )} \cos^{2}{\left (\theta_{1} \right )}}{2} + \frac{P^{2} \sin^{2}{\left (\theta_{2} \right )}}{2} + \frac{\sin^{2}{\left (\theta_{2} \right )} \cos^{2}{\left (\theta_{1} \right )}}{2} + \frac{\sin^{2}{\left (\theta_{2} \right )}}{2}
 \end{align}
 The expression does not change under the flip of $P$ and $s$ sign simultaneously.
-Hence, the group-$\II$ with $b=0$ is undistinguished from the group-$\III$,
-and the group-$\I$ with $b=d=c=0$ have the same angular distributions as the group-$\IV$ with $c=0$.
+Hence, group-$\II$ with $b=0$ is undistinguished from group-$\III$,
+and group-$\I$ with $b=d=c=0$ have the same angular distributions as group-$\IV$ with $c=0$.
 Such vanishing of the helicity couplings, however, must be an exceptional case indicating some peculiar physical reason.
 
 \bibliography{ref}
