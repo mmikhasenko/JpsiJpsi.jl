@@ -7,7 +7,7 @@ using Plots
 theme(:wong)
 # pyplot()
 
-const Nd = 1000;
+const Nd = 500;
 
 Mcos2ϕ(S) = sum(cos.(2 .* S)) / length(S)
 
