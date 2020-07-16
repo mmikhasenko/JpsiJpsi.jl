@@ -13,7 +13,7 @@ function get_fit_results(filename)
    JLD2.read(f, "H1_t"), JLD2.read(f, "TS")
 end
 
-wl = wload(datadir("simulations", "groups_cross_testing", "Natt=5_Nev=500_Nsampl=500_gen_group=1.jld2"));
+wl = wload(datadir("simulations", "groups_cross_testing", "Natt=5_Nev=500_Nsampl=500_gen_group=1_higgs_1m11.jld2"));
 fr_0p = wl["fit_results"];
 
 let bins=range(-1,-0.7,length=100)
@@ -40,7 +40,7 @@ let bins=range(-0.84,-0.75,length=100)
     stephist!(-map(v->v[4].LLH, fr_1p) ./ Nev_1m, bins=bins, lab="group-IV")
 end
 
-let bins=range(-30/500,70/500,length=50)
+let bins=range(-30/500,90/500,length=50)
     plot(size=(450,300), xlab=L"\mathrm{TS}(0^+/1^-)", ylab=L"\#\,\,\mathrm{sample\,\,entries}")
     stephist!(-map(v->v[1].LLH - v[3].LLH, fr_0p) ./ Nev_1m, bins=bins, lab="", seriescolor=1, fill_between=0, alpha=0.4)
     stephist!(-map(v->v[1].LLH - v[3].LLH, fr_0p) ./ Nev_1m, bins=bins, lab=L"0^+\,\,\mathrm{generated}", seriescolor=1, lw=1.0)
