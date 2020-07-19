@@ -9,8 +9,8 @@ function I4μ(vars; H=error("helicity coupling"))
     @unpack cosθ1,cosθ2,ϕ = vars
     return real(sum(
         (λ1-λ2 == λ1′-λ2′ ? 1 : 0) *
-            wignerd(1,λ1 ,ξ1,cosθ1) * wignerd(1,λ2 ,ξ2,cosθ2) * (isodd(1-λ2 ) ? -1 : 1) *
-            wignerd(1,λ1′,ξ1,cosθ1) * wignerd(1,λ2′,ξ2,cosθ2) * (isodd(1-λ2′) ? -1 : 1) *
+            wignerd(1,λ1 ,ξ1,cosθ1) * wignerd(1,λ2 ,ξ2,cosθ2) *
+            wignerd(1,λ1′,ξ1,cosθ1) * wignerd(1,λ2′,ξ2,cosθ2) *
             cis((λ1-λ1′)*ϕ) *
                  H[ λ1+2,λ2+2] *
             conj(H[λ1′+2,λ2′+2])
@@ -23,8 +23,8 @@ function I4K(vars; H=error("helicity coupling"))
     @unpack cosθ1,cosθ2,ϕ = vars
     return real(sum(
         (λ1-λ2 == λ1′-λ2′ ? 1 : 0) *
-            wignerd(1,λ1 ,0,cosθ1) * wignerd(1,λ2 ,0,cosθ2) * (isodd(1-λ2 ) ? -1 : 1) *
-            wignerd(1,λ1′,0,cosθ1) * wignerd(1,λ2′,0,cosθ2) * (isodd(1-λ2′) ? -1 : 1) *
+            wignerd(1,λ1 ,0,cosθ1) * wignerd(1,λ2 ,0,cosθ2) *
+            wignerd(1,λ1′,0,cosθ1) * wignerd(1,λ2′,0,cosθ2) *
             cis((λ1-λ1′)*ϕ1) *
                 H[ λ1+2, λ2+2] *
            conj(H[λ1′+2,λ2′+2])
