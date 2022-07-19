@@ -27,7 +27,7 @@ md"""
 """
 
 # ╔═╡ d989eab6-53e8-49d5-9c2b-ecb59269f308
-function A4P(vars, ξrange; H)
+function I4P(vars, ξrange; H)
     @unpack θ1,ϕ,θ2 = vars
 	nξ = length(ξrange)
     return simplify(9/Sym(nξ^2)*sum(
@@ -60,23 +60,23 @@ md"""
 
 # ╔═╡ e57abfb3-8a3e-4e51-9039-393110f16af5
 begin
-	A4μ(vars; H) = A4P(vars, (-1,1); H)
-	A4K(vars; H) = A4P(vars, (0,); H)
+	I4μ(vars; H) = I4P(vars, (-1,1); H)
+	I4K(vars; H) = I4P(vars, (0,); H)
 end
-
-# ╔═╡ 0fc4b7db-0589-44de-98aa-18fd76b2126e
-md"""
-## Expansion in a basis
-"""
 
 # ╔═╡ 0bac613d-afb8-4cb6-8dbc-226c3ebaff6d
 θ1, θ2, ϕ = @vars θ_1 θ_2 ϕ positive=true
 
 # ╔═╡ abc17790-fef5-41d6-8a89-1e53a525d45e
-A4μ_full = A4μ((; θ1,ϕ,θ2); H=Hg) ;
+I4μ_full = I4μ((; θ1,ϕ,θ2); H=Hg) ;
 
 # ╔═╡ e361dd95-e168-42fa-843f-815d3ce21f51
-A4K_full = A4K((; θ1,ϕ,θ2); H=Hg) ;
+I4K_full = I4K((; θ1,ϕ,θ2); H=Hg) ;
+
+# ╔═╡ 0fc4b7db-0589-44de-98aa-18fd76b2126e
+md"""
+## Expansion in a basis
+"""
 
 # ╔═╡ 099913fe-ac20-4d1c-8755-a7ac4d1da78c
 const angular_basis = [
@@ -127,7 +127,7 @@ md"""
 """
 
 # ╔═╡ a6502774-b01e-49ae-9e1b-5f58373b8525
-coeff_μ = expand_on_basis(A4μ_full, angular_basis) ;
+coeff_μ = expand_on_basis(I4μ_full, angular_basis) ;
 
 # ╔═╡ 3b46e566-c7f2-4892-91b1-59bfd91c91b1
 @assert simplify(sum(coeff_μ .* norms)) ==
@@ -142,7 +142,7 @@ md"""
 """
 
 # ╔═╡ 02529c4d-79d6-4210-8add-ec2375ac2715
-coeff_K = expand_on_basis(A4K_full, angular_basis) ;
+coeff_K = expand_on_basis(I4K_full, angular_basis) ;
 
 # ╔═╡ 05fb0941-85ad-4768-9adb-119f15542c1f
 simplify(sum(coeff_K .* norms))
@@ -164,10 +164,10 @@ md"""
 """
 
 # ╔═╡ ca2773ba-c781-4786-be3d-d9c0d549a1c8
-asymmetryβ_μ = A4μ_full |> integrateθs ;
+asymmetryβ_μ = I4μ_full |> integrateθs ;
 
 # ╔═╡ 152ac4eb-7eb5-41f8-b9d7-bffa5e61f4c2
-asymmetryβ_K = A4K_full |> integrateθs ;
+asymmetryβ_K = I4K_full |> integrateθs ;
 
 # ╔═╡ 2016bd95-739a-4227-a4a0-bab46676296c
 function getβ(f)
@@ -192,7 +192,7 @@ md"""
 """
 
 # ╔═╡ 02aa1aa3-ef47-47be-bbbd-bae4feb73b4b
-asymmetryζ_μ = integrateθ(A4μ_full,θ1) |> integrateϕ |> expand;
+asymmetryζ_μ = integrateθ(I4μ_full,θ1) |> integrateϕ |> expand;
 
 # ╔═╡ 4b1009c0-5f5a-4373-aaed-0b1a1c9a7bc9
 function getζ(f)
@@ -211,7 +211,7 @@ end
 Dict(:ζμ => getζ(asymmetryζ_μ))
 
 # ╔═╡ 09f3d176-9529-4fdc-bc74-5578b23dc06f
-asymmetryζ_K = integrateθ(A4K_full,θ1) |> integrateϕ ;
+asymmetryζ_K = integrateθ(I4K_full,θ1) |> integrateϕ ;
 
 # ╔═╡ 250df9a1-a935-4325-b3f1-448a172fec1a
 Dict(:ζK => getζ(asymmetryζ_K))
