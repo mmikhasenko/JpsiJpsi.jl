@@ -3,6 +3,11 @@ module JpsiJpsi
 using PartialWaveFunctions
 using Parameters
 using Optim
+using LinearAlgebra
+import LinearAlgebra: ×
+
+export H_higgs
+include("constants.jl")
 
 export Hλλ
 export gHs, ngHs

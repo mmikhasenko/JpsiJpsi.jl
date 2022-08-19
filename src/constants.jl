@@ -1,0 +1,1 @@
+const H_higgs = Diagonal([1.0, -1.0, 1.0]) / √3

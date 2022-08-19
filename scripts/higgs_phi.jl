@@ -8,6 +8,7 @@ using Parameters
 using Plots
 using Statistics
 using AlgebraPDF
+using FileIO
 
 theme(:wong, frame=:box, grid=false, minorticks=true,
     guidefontvalign=:top, guidefonthalign=:right,
@@ -45,8 +46,6 @@ end
 #  _|        _|    _|  _|    _|  _|        
 #    _|_|_|    _|_|      _|_|_|    _|_|_|  
 
-using FileIO
-const H_higgs = Diagonal(fill(1 / sqrt(3), 3))
 
 datasample_filename = datadir("simulations", "higgs_sample", "cosθ12ϕ.jld2")
 if !isfile(datasample_filename)

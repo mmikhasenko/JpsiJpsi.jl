@@ -2,7 +2,7 @@
 
 The document presents exploratory studies of J/ψ (μ⁺μ⁻) J/ψ (μ⁺μ⁻) system.
 
-Paper plots:
+Paper plots in `scripts`:
 
 - `fitting_higgs.jl`: generate and fit samples
 - `higgs_0p_vs_1p.jl`: paper figures

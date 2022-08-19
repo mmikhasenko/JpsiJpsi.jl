@@ -5,7 +5,6 @@ Pkg.instantiate()
 
 using JpsiJpsi
 using Parameters
-using LinearAlgebra
 #
 function makesim(d::Dict)
     @unpack Hgen, ng_fit_by, Nev, Natt, Nsampl = d
@@ -29,11 +28,11 @@ function makesim(d::Dict)
 end
 
 params = Dict(
-    :Nev => 100,
+    :Nev => 500,
     :Natt => 5,
-    :Nsampl => 5,
+    :Nsampl => 500,
     :gen_group => 1,
-    :Hgen => Diagonal([1.0, -1.0, 1.0]) / √3,
+    :Hgen => H_higgs,
     :ng_fit_by => collect(1:7),
 )
 
