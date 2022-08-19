@@ -12,10 +12,4 @@ Paper plots in `scripts`:
 Additional exercises:
 
 - `theta1theta2correlations.jl`: cosθ₁-cosθ₂ correlation
-- `fit_of_couplings.jl`:
-- `generate_hypothesis_samples.jl`: generate the samples
-- `pseudodata_and_fit.jl`:
-- `sign_of_cos2phi.jl`:
-- `pyplot_settings.jl`:
-- `plot_hypotheses.jl`:
-- `plot_matrices.jl`:
+- `sign_of_cos2phi.jl`: check beta-sign using moments for randH

@@ -6,8 +6,10 @@ Pkg.instantiate()
 using LinearAlgebra
 
 using Plots
-theme(:wong)
-# pyplot()
+theme(:wong, frame=:box, grid=false, minorticks=true,
+    guidefontvalign=:top, guidefonthalign=:right,
+    foreground_color_legend=nothing,
+    xlim=(:auto, :auto), ylim=(:auto, :auto))
 
 const Nd = 500;
 
@@ -20,9 +22,9 @@ S3_t = [Mcos2ϕ(getproperty.(sample(Nd; H=ngHs[3][1]), :ϕ)) for _ in 1:100]
 let bins = range(-0.2, 0.2, length=50)
     plot(title="Odd and even spins",
         xlab="M2 moment")
-    histogram!(S1_t, bins=bins, lab="group-I", α=0.8)
-    histogram!(S2_t, bins=bins, lab="group-II", α=0.8)
-    histogram!(S3_t, bins=bins, lab="group-III", α=0.8)
+    stephist!(S1_t, bins=bins, lab="group-I", fill=0, α=0.7)
+    stephist!(S2_t, bins=bins, lab="group-II", fill=0, α=0.7)
+    stephist!(S3_t, bins=bins, lab="group-III", fill=0, α=0.7)
 end
 savefig(joinpath("plots", "moment_M2phi_Nev=500.pdf"))
 
@@ -48,22 +50,22 @@ end
 let bins = range(-0.2, 0.2, length=50)
     plot(title="Odd and even spins",
         xlab="M2 moment")
-    histogram!(M_for_ng1_w, bins=bins, lab="group-I", α=0.8)
-    histogram!(M_for_ng2_w, bins=bins, lab="group-II", α=0.8)
-    histogram!(M_for_ng3_w, bins=bins, lab="group-III", α=0.8)
+    stephist!(M_for_ng1_w, bins=bins, lab="group-I", fill=0, α=0.8)
+    stephist!(M_for_ng2_w, bins=bins, lab="group-II", fill=0, α=0.8)
+    stephist!(M_for_ng3_w, bins=bins, lab="group-III", fill=0, α=0.8)
 end
 savefig(joinpath("plots", "moment_M2phi_Nev=$(Nd).pdf"))
 
 const Nd′ = 1500;
-@time M_for_ng1_w′ = [randMcos2ϕ(0, Nd′) for _ in 1:1000];
-@time M_for_ng2_w′ = [randMcos2ϕ(1, Nd′) for _ in 1:1000];
-@time M_for_ng3_w′ = [randMcos2ϕ(2, Nd′) for _ in 1:1000];
+@time M_for_ng1_w′ = [randMcos2ϕ(1, Nd′) for _ in 1:1000];
+@time M_for_ng2_w′ = [randMcos2ϕ(2, Nd′) for _ in 1:1000];
+@time M_for_ng3_w′ = [randMcos2ϕ(3, Nd′) for _ in 1:1000];
 
 let bins = range(-0.2, 0.2, length=50)
     plot(title="Odd and even spins",
         xlab="M2 moment")
-    histogram!(M_for_ng1_w′, bins=bins, lab="group-I", α=0.8)
-    histogram!(M_for_ng2_w′, bins=bins, lab="group-II", α=0.8)
-    histogram!(M_for_ng3_w′, bins=bins, lab="group-III", α=0.8)
+    stephist!(M_for_ng1_w′, bins=bins, lab="group-I", fill=0, α=0.8)
+    stephist!(M_for_ng2_w′, bins=bins, lab="group-II", fill=0, α=0.8)
+    stephist!(M_for_ng3_w′, bins=bins, lab="group-III", fill=0, α=0.8)
 end
 savefig(joinpath("plots", "moment_M2phi_Nev=$(Nd′).pdf"))
