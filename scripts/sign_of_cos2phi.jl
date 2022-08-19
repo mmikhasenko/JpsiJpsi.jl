@@ -1,5 +1,7 @@
-using DrWatson
-@quickactivate "JpsiJpsi"
+using Pkg
+cd(joinpath(@__DIR__, ".."))
+Pkg.activate(".")
+Pkg.instantiate()
 
 using LinearAlgebra
 
