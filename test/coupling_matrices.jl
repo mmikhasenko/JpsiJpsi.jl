@@ -21,3 +21,9 @@ let
 end
 #
 @test A4μ((cosθ1=0.1, ϕ1=0.2, cosθ2=0.3, ϕ2=0.4); LS=(0, 0), J=0) != 0
+
+@testset "Orthogonality" begin
+    @test prod([hi × hj for hi in ngHs[1], hj in ngHs[3]] .== 0)
+    @test prod([hi × hj for hi in ngHs[1], hj in ngHs[2]] .== 0)
+    @test prod([hi × hj for hi in ngHs[3], hj in ngHs[2]] .== 0)
+end
