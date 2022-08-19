@@ -6,7 +6,7 @@ function get_fit_results(;
     Jsample=error("J generated"), Nev=error("N events"),
     Natt=5, Nsampl=error("size of sample"))
     #
-    f = jldopen(joinpath(path_to_save, "results_J$(Jsample)_Nev$(Nev)_Natt$(Natt)_Nsamples$(Nsampl).jld2"))
+    f = JLD2.jldopen(joinpath(path_to_save, "results_J$(Jsample)_Nev$(Nev)_Natt$(Natt)_Nsamples$(Nsampl).jld2"))
     JLD2.read(f, "H1_t"), JLD2.read(f, "TS")
 end
 
