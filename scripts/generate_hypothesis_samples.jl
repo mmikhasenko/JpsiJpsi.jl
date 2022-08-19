@@ -8,8 +8,11 @@ using Parameters: @unpack
 using LinearAlgebra
 using Plots
 using Optim
-using JLD2
-theme(:wong)
+using FileIO
+# 
+theme(:wong2, frame=:box, grid=false, minorticks=true,
+    guidefontvalign=:top, guidefonthalign=:right,
+    xlim=(:auto, :auto), ylim=(:auto, :auto))
 #
 function makesim(d::Dict)
     @unpack Hgen, ng_fit_by, Nev, Natt, Nsampl = d
@@ -40,12 +43,9 @@ params = Dict(
     :Hgen => randH(1),
     :ng_fit_by => collect(1:7)
 )
-let
-    f = makesim(params)
-    # wsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
-    @tagsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
-end
 
 f = makesim(params)
-# wsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
-@tagsave(datadir("simulations", "groups_cross_testing", savename(params, "bson")), f)
+save(datadir("simulations",
+        "groups_cross_testing",
+        "Natt=$(params[:Natt])_Nev=$(params[:Nev])_Nsampl=$(params[:Nsampl])_gen_group=$(params[:gen_group]).jld2"), "results", f)
+
