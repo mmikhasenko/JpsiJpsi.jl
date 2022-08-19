@@ -1,0 +1,33 @@
+{
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[julia]": {
+    "editor.defaultFormatter": "julialang.language-julia"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.rulers": [],
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80,
+    "editor.wrappingIndent": "same",
+    "editor.wrappingStrategy": "advanced"
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.rulers": [88],
+  "files.associations": {
+    ".cspell/*.txt": "plaintext"
+  },
+  "files.eol": "\n",
+  "julia.NumThreads": "auto",
+  "rewrap.wrappingColumn": 88
+}
