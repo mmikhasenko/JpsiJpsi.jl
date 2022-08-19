@@ -49,10 +49,8 @@ end
 
 datasample_filename = datadir("simulations", "higgs_sample", "cosθ12ϕ.jld2")
 if !isfile(datasample_filename)
-    S1_t = sample(500; H=H_higgs)
+    @time S1_t = sample(500; H=H_higgs)
     save(datasample_filename, Dict(:sample => S1_t))
-    # writedlm(datadir("simulations", "higgs_sample", "cosθ12ϕ.txt"),
-    #     [getproperty.(S1_t, :cosθ1) getproperty.(S1_t, :cosθ2) getproperty.(S1_t, :ϕ)])
 end
 S1_t = load(datasample_filename)["sample"]
 
@@ -77,27 +75,22 @@ frc = fit(Icθi, vcat(cosθ1v, cosθ2v); init_pars=[0.0])[:measurements]
 #                                      _|                                _|
 #                                      _|                            _|_|
 
-
-betazeta_filename = datadir("simulations", "higgs_sample", "betazeta.txt")
+betazeta_filename = datadir("simulations", "higgs_sample", "betazeta.jld2")
 if !isfile(betazeta_filename)
     @time βζs = [
         let Nev = 500
             S = sample(Nev; H=H_higgs)
             ϕv = getproperty.(S, :ϕ)
-            β = fit(Iϕ, ϕv; init_pars=[0.3])[1]
+            @unpack β = fit(Iϕ, ϕv; init_pars=[0.3])[:parameters]
             dv = getproperty.(S, :cosθ1)
-            ζ = fit(Icθi, dv; init_pars=[0.0])[1]
+            @unpack ζ = fit(Icθi, dv; init_pars=[0.0])[:parameters]
             (β=β, ζ=ζ)
         end for _ in 1:500
     ]
     #
-    writedlm(betazeta_filename,
-        [getproperty.(βζs, :β) getproperty.(βζs, :ζ)])
+    save(betazeta_filename, Dict(:βζs => βζs))
 end
-
-βζs = let v = readdlm(betazeta_filename)
-    NamedTuple{(:β, :ζ)}.([v[i, :] for i in 1:size(v, 1)])
-end
+@unpack βζs = load(betazeta_filename)
 
 #            _|              _|      _|      _|
 #  _|_|_|    _|    _|_|    _|_|_|_|_|_|_|_|      _|_|_|      _|_|_|
@@ -107,7 +100,7 @@ end
 #  _|                                                            _|
 #  _|                                                        _|_|
 
-fs = [(f=ϕ -> Iϕ(ϕ, p=(β=1 / 6,)), lab=L"0^+\,\,\mathrm{with}\,\,b=d"),
+fs = [(f=ϕ -> Iϕ(ϕ, p=(β=1 / 6,)), lab=L"0^+"),
     (f=ϕ -> Iϕ(ϕ, p=(β=-1 / 4,)), lab=L"0^-"),
     (f=ϕ -> Iϕ(ϕ, p=(β=0.0,)), lab=L"1^-"),
 ];
@@ -119,10 +112,11 @@ let Nbins = 10
     errorhist!(ϕv, bins=range(-π, π, length=Nbins + 1), seriescolor=:black, lab=L"\mathrm{data}")
     plot!(ylim=(0, 70), leg=:bottomright)
     #
-    plot!(inset=(1, bbox(0.11, 0.51, 0.3, 0.35)))
+    plot!(inset=(1, bbox(0.15, 0.51, 0.3, 0.35)))
     plot!(sp=2, xlab=L"\beta", ylab=L"\#\,\,\mathrm{samples}")
     stephist!(sp=2, getproperty.(βζs, :β), frame=:box, lab="", lc=:black,
-        bins=range(-1 / 4, 0.32, length=35))
+        bins=range(-1 / 4, 0.32, length=35),
+        guidefonthalign=:center)
     vline!(sp=2, [1 / 6], lab="", seriescolor=1, lw=2)
     vline!(sp=2, [-1 / 4], lab="", seriescolor=2, lw=2)
     vline!(sp=2, [0], lab="", seriescolor=3, lw=2,
@@ -134,7 +128,7 @@ savefig(plotsdir("phi_higgs.pdf"))
 
 
 
-gs = [(f=cosθ -> Icθi(cosθ, p=(ζ=0,)), lab=L"0^{+}\,\,\mathrm{with}\,\,b=d"),
+gs = [(f=cosθ -> Icθi(cosθ, p=(ζ=0,)), lab=L"0^{+}"),
     (f=cosθ -> Icθi(cosθ, p=(ζ=1 / 2,)), lab=L"0^{-}"),
     (f=cosθ -> Icθi(cosθ, p=(ζ=-1 / 4,)), lab=L"1^{-}"),
 ];
