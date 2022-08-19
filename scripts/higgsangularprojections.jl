@@ -46,10 +46,11 @@ end
 #  _|        _|    _|  _|    _|  _|        
 #    _|_|_|    _|_|      _|_|_|    _|_|_|  
 
+const Nev = 500
 
 datasample_filename = datadir("simulations", "higgs_sample", "cosθ12ϕ.jld2")
 if !isfile(datasample_filename)
-    @time S1_t = sample(500; H=H_higgs)
+    @time S1_t = sample(Nev; H=H_higgs)
     save(datasample_filename, Dict(:sample => S1_t))
 end
 S1_t = load(datasample_filename)["sample"]
@@ -78,7 +79,7 @@ frc = fit(Icθi, vcat(cosθ1v, cosθ2v); init_pars=[0.0])[:measurements]
 betazeta_filename = datadir("simulations", "higgs_sample", "betazeta.jld2")
 if !isfile(betazeta_filename)
     @time βζs = [
-        let Nev = 500
+        let
             S = sample(Nev; H=H_higgs)
             ϕv = getproperty.(S, :ϕ)
             @unpack β = fit(Iϕ, ϕv; init_pars=[0.3])[:parameters]
