@@ -1,5 +1,5 @@
-contract(H,pars) = sum(h*p for (h,p) in zip(H, pars))
-×(H1,H2) = sum(H1 .* conj(H2))
+contract(H, pars) = sum(h * p for (h, p) in zip(H, pars))
+×(H1, H2) = sum(H1 .* conj(H2))
 
 """
     algebraic_inversion_matrix(H; ng=error("give number of category"))
@@ -25,7 +25,7 @@ function fit_matrix(H; ng=error("give number of category"))
     f(pars) = intensity(contract(ngHs[ng], unfold(pars)) - H)
     init_pars = rand(2n)
     found_pars = Optim.minimizer(Optim.optimize(f, init_pars, BFGS(),
-                Optim.Options(show_trace = false); autodiff = :forwarddiff))
+        Optim.Options(show_trace=false); autodiff=:forwarddiff))
     return found_pars
 end
 
@@ -36,7 +36,7 @@ generates a random helicity-coupling matrix with complex coefficients
 using the basis of groups indexed by ng.
 """
 function randH(ng)
-    fixed_pars = 2 .* rand(Complex{Float64},length(ngHs[ng])) .- (1.0+1im)
+    fixed_pars = 2 .* rand(Complex{Float64}, length(ngHs[ng])) .- (1.0 + 1im)
     fixed_pars ./= sqrt(sum(abs2, fixed_pars))
     H = contract(ngHs[ng], fixed_pars)
     return H

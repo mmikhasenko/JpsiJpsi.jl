@@ -14,15 +14,17 @@ function makesim(d::Dict)
     #
     fulld = copy(d)
     #
-    @time TS = [let
-        println("\nitteration $(e)/$(Nsampl)\n")
-        #
-        S1_t = sample(Nev; H = Hgen)
-        fits = [[fit_sample(S1_t; ng = ng) for _ in 1:Natt] for ng in ng_fit_by]
-        best_fits = [f[findmin(getproperty.(f, :LLH))[2]] for f in fits]
-        #
-        best_fits
-    end for e in 1:Nsampl]
+    @time TS = [
+        let
+            println("\nitteration $(e)/$(Nsampl)\n")
+            #
+            S1_t = sample(Nev; H=Hgen)
+            fits = [[fit_sample(S1_t; ng=ng) for _ in 1:Natt] for ng in ng_fit_by]
+            best_fits = [f[findmin(getproperty.(f, :LLH))[2]] for f in fits]
+            #
+            best_fits
+        end for e in 1:Nsampl
+    ]
     #
     fulld[:fit_results] = TS
     return fulld
