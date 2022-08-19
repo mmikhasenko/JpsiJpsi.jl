@@ -31,16 +31,3 @@ function I4K(vars; H=error("helicity coupling"))
         for λ1 in -1:1, λ2 in -1:1,
         λ1′ in -1:1, λ2′ in -1:1))
 end
-
-# I4μ_LS(vars; LS, J) = I4μ(vars; H=[Hλλ(λ1, λ2;  LS=LS, J=J) for λ1 in -1:1, λ2  in -1:1])
-# I4K_LS(vars; LS, J) = I4K(vars; H=[Hλλ(λ1, λ2;  LS=LS, J=J) for λ1 in -1:1, λ2  in -1:1])
-#
-function I4μ_intϕ(vars; H=error("helicity coupling"))
-    @unpack cosθ1, cosθ2 = vars
-    return real(sum(
-        wignerd(1, λ1, ξ1, cosθ1) * wignerd(1, λ2, ξ2, cosθ2) *
-        wignerd(1, λ1, ξ1, cosθ1) * wignerd(1, λ2, ξ2, cosθ2) *
-        abs2(H[λ1+2, λ2+2])
-        for ξ1 in [-1, 1], ξ2 in [-1, 1],
-        λ1 in -1:1, λ2 in -1:1))
-end

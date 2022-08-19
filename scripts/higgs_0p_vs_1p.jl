@@ -3,23 +3,29 @@ cd(joinpath(@__DIR__, ".."))
 Pkg.activate(".")
 Pkg.instantiate()
 
-using JLD2
+using FileIO
 using Plots
+using LaTeXStrings
 using Statistics
 
-theme(:wong)
-include(joinpath("pyplot_settings.jl"))
+theme(:wong, frame=:box, grid=false, minorticks=true,
+    guidefontvalign=:top, guidefonthalign=:right,
+    foreground_color_legend=nothing,
+    xlim=(:auto, :auto), ylim=(:auto, :auto))
+# include(joinpath("pyplot_settings.jl"))
 
 function get_fit_results(filename)
-    f = jldopen(filename)
+    f = JLD2.jldopen(filename)
     JLD2.read(f, "H1_t"), JLD2.read(f, "TS")
 end
 
-wl = wload(datadir("simulations", "groups_cross_testing", "Natt=5_Nev=500_Nsampl=500_gen_group=1_higgs_1m11.jld2"));
+wl = load(datadir("simulations", "groups_cross_testing", "Natt=5_Nev=500_Nsampl=500_gen_group=1_higgs_1m11.jld2"));
 fr_0p = wl["fit_results"];
 
 let bins = range(-1, -0.7, length=100)
-    plot(size=(450, 300), xlab=L"\mathcal{L}(G\{\hat{h}\})", ylab=L"\#\,\,\mathrm{sample\,\,entries}")
+    plot(size=(450, 300), leg=:topleft,
+        xlab=L"\mathcal{L}(G\{\hat{h}\})",
+        ylab=L"\#\,\,\mathrm{sample\,\,entries}")
     stephist!(-map(v -> v[1].LLH, fr_0p) ./ wl["Nev"], bins=bins, lab="", seriescolor=1, α=0.4, fill_between=0)
     stephist!(-map(v -> v[1].LLH, fr_0p) ./ wl["Nev"], bins=bins, lab=L"\mathrm{fit\,\,by\,\,group-I}", seriescolor=1, lw=1.0)
     stephist!(-map(v -> v[2].LLH, fr_0p) ./ wl["Nev"], bins=bins, lab="", seriescolor=2, α=0.4, fill_between=0)

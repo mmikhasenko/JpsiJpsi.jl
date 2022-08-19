@@ -4,13 +4,15 @@ Pkg.activate(".")
 Pkg.instantiate()
 
 using JpsiJpsi
-using Parameters: @unpack
+using Parameters
 using LinearAlgebra
 using Plots
 using DelimitedFiles
-theme(:wong)
 
-include(joinpath("pyplot_settings.jl"))
+theme(:wong, frame=:box, grid=false, minorticks=true,
+    guidefontvalign=:top, guidefonthalign=:right,
+    foreground_color_legend=nothing,
+    xlim=(:auto, :auto), ylim=(:auto, :auto))
 
 #
 let

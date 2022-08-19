@@ -10,7 +10,7 @@ export groups, specs
 include("helicity_couplings.jl")
 
 export xR2vars, vars2xR
-export I4μ, I4μ_intϕ
+export I4μ
 export I4K
 include("angular_functions.jl")
 
@@ -24,5 +24,7 @@ export randu, randvars
 export sample, fit_sample
 include("sampling.jl")
 
+export datadir, plotsdir
+include("io.jl")
 
 end # module
