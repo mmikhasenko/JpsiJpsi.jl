@@ -2,6 +2,8 @@
 
 The document presents exploratory studies of J/ψ (μ⁺μ⁻) J/ψ (μ⁺μ⁻) system.
 
+Pages for the project are hosted at http://h2vv.docs.cern.ch
+
 Paper plots in `scripts`:
 
 - `higgsgenerateandfit.jl`: generate and fit samples
