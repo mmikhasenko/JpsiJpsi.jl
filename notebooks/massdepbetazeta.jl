@@ -7,11 +7,7 @@ using InteractiveUtils
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     quote
-        local iv = try
-            Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value
-        catch
-            b -> missing
-        end
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
@@ -92,7 +88,7 @@ function amplitude(hm::HelicityMatrix)
         (1+s*ϵ)*s*c/2 ϵ*a (1+s)*ϵ*b/2]
     # 
     normH² = sum(abs2, H)
-    return H .* sqrt(N / normH²)
+    return H .* sqrt(N^2 / normH²)
 end
 
 # ╔═╡ 6350eb3a-2265-48ce-983e-5f79808dc2fa
@@ -124,11 +120,11 @@ begin
         m::Float64
         Γ::Float64
     end
-    amplitude(x::BW, m::Float64) = x.m * x.Γ / (x.m^2 - m^2 - 1im * x.m * x.Γ)
+    amplitude(x::BW, m::Float64) = -1*x.m^2 / (x.m^2 - m^2 - 1im * x.m * x.Γ)
     struct Continuum
         β::Float64
     end
-    amplitude(x::Continuum, m::Float64) = exp(-x.β * m) / x.β
+    amplitude(x::Continuum, m::Float64) = 100*exp(-x.β * m)
 end;
 
 # ╔═╡ dfd7c46e-ebed-4205-ba27-d8bba025b819
@@ -162,9 +158,9 @@ end
 
 # ╔═╡ 381befba-df77-45e2-bf78-48e4ffd6d8a3
 begin
-    const mJψ = 3.09
+    const mJψ = 3.097
     const mth = mJψ * 2
-    ρ(m) = m > mth ? sqrt(1 - mth / m) : 0.0
+    ρ(m) = m > mth ? sqrt(1 - mth^2 / m^2) : 0.0
 end
 
 # ╔═╡ 2f9072e6-3375-4c97-840f-7d52291ab7ad
@@ -218,19 +214,6 @@ begin
     const Γ₁ = 0.08
 end;
 
-# ╔═╡ a750c62a-261f-4338-9905-c8f2b946b37b
-md"""
-#### Narrow resonance
-
-N₁ = $(@bind N₁ Slider(range(0.1,0.4,100), show_value=true, default=0.4))
-
-#### Continuum
-
-bₓ = $(@bind bₓ Slider(range(0.1,1/sqrt(2),100), show_value=true, default=0.55))
-
-#### Broad Resonance
-"""
-
 # ╔═╡ e7e08713-94d2-4022-b74e-43eb53fa2df7
 begin
     struct TwoColumn{L,R}
@@ -247,42 +230,63 @@ begin
 end
 
 # ╔═╡ 162f2c8f-3095-4c5a-a5da-62c6503c38d4
+
 TwoColumn(
-    md"""
-    ##### Non interf.
-    m₂ = $(@bind m₂ Slider(range(6.35,6.55,100), show_value=true, default=6.45))
+md"""
+##### Non interf.
+###### Continuum
+bₓ = $(@bind bₓ Slider(range(0.1,1/sqrt(2),1000), show_value=true, default=0.55))
 
-    Γ₂ = $(@bind Γ₂ Slider(range(0.4,0.6,100), show_value=true, default=0.5))
+Nc = $(@bind Nc Slider(range(0.1,50,1000), show_value=true, default=44.3))
 
-    N₂ = $(@bind N₂ Slider(range(0.0,0.8,100), show_value=true, default=0.4))
+###### Narrow resonance
+N₁ = $(@bind N₁ Slider(range(0.1,10,100), show_value=true, default=6.3))
 
-    b₂ = $(@bind b₂ Slider(range(0.1,1/sqrt(2),100), show_value=true, default=0.2))
-    """,
-    md"""
-    ##### Interf.
+###### Broad Resonance
+m₂ = $(@bind m₂ Slider(range(6.35,6.55,1000), show_value=true, default=6.45))
 
-    m₂ = $(@bind m₂′ Slider(range(6.35,6.55,100), show_value=true, default=6.45))
+Γ₂ = $(@bind Γ₂ Slider(range(0.4,0.6,1000), show_value=true, default=0.5))
 
-    Γ₂ = $(@bind Γ₂′ Slider(range(0.4,0.6,100), show_value=true, default=0.5))
+N₂ = $(@bind N₂ Slider(range(0.0,100,1000), show_value=true, default=61.3))
 
-    N₂ = $(@bind N₂′ Slider(range(0.0,0.8,100), show_value=true, default=0.4))
+b₂ = $(@bind b₂ Slider(range(0.1,1/sqrt(2),1000), show_value=true, default=0.2))
+""",
+md"""
+##### Interf.
+###### Continuum
 
-    b₂ = $(@bind b₂′ Slider(range(0.1,1/sqrt(2),100), show_value=true, default=0.2))
+Nc′ = $(@bind Nc′ Slider(range(0.1,10,1000), show_value=true, default=4.3))
 
-    """)
+ϕ = $(@bind ϕ Slider(range(-π,π,1000), show_value=true, default=(π/2-0.4)))
+
+###### Narrow resonance
+N₁′ = $(@bind N₁′ Slider(range(0.1,1,1000), show_value=true, default=0.36))
+
+###### Broad Resonance
+m₂ = $(@bind m₂′ Slider(range(6.7,6.8,1000), show_value=true, default=6.74))
+
+Γ₂ = $(@bind Γ₂′ Slider(range(0.2,0.6,1000), show_value=true, default=0.288))
+
+N₂ = $(@bind N₂′ Slider(range(0.0,5.,100), show_value=true, default=1.))
+
+b₂′ = $(@bind b₂′ Slider(range(0.1,1/sqrt(2),1000), show_value=true, default=0.1))
+
+
+	
+""")
 
 # ╔═╡ efbe708c-f7e0-4146-ad37-d90239728a57
 set1 = [
-    Wave("0+"; N=4, b=bₓ, d=sqrt(1 - 2bₓ^2), lineshape=Continuum(0.7 / 2)),
+    Wave("0+"; N=Nc, b=bₓ, d=sqrt(1 - 2bₓ^2), lineshape=Continuum(0.65568 / 2)),
     # 
     Wave("0-"; N=N₁, b=1 / sqrt(2), lineshape=BW(m₁, Γ₁)),
-    Wave("2+"; N=N₂, b=b₂, lineshape=BW(m₂, Γ₂))];
+    Wave("2+"; N=N₂, b=b₂, d=sqrt(1 - 2b₂^2), lineshape=BW(m₂, Γ₂))];
 
 # ╔═╡ 7eb64856-8a39-4fde-b729-c529bce19fab
 set2 = [
-    Wave("0+"; N=4, b=bₓ, d=sqrt(1 - 2bₓ^2), lineshape=Continuum(0.7 / 2)),
+    Wave("0+"; N=Nc′, b=bₓ*cis(ϕ), d=sqrt(1 - 2bₓ^2)*cis(ϕ), lineshape=Continuum(0.9137 / 2)),
     # 
-    Wave("0-"; N=N₁, b=1 / sqrt(2), lineshape=BW(m₁, Γ₁)),
+    Wave("0-"; N=N₁′, b=1 / sqrt(2), lineshape=BW(m₁, Γ₁)),
     Wave("0+"; N=N₂′, b=b₂′, d=sqrt(1 - 2b₂′^2), lineshape=BW(m₂′, Γ₂′))];
 
 # ╔═╡ d9c937c1-1c83-404f-bcc7-6acd2e1a89be
@@ -291,7 +295,7 @@ let
         ylab=[L"\mathrm{Intensity}" L"\mathrm{Intensity}" L"\beta" L"\beta" L"\zeta" L"\zeta"], xlab=L"m(J/\psi\,J/\psi)\,\,[\mathrm{GeV}]")
     # 
     plot!(sp=1, set1, 6, 9, title="No Interf.")
-    plot!(sp=3, set1, 6, 9; operator=beta, ylim=(-1 / 4, 1 / 4), fillrange=nothing, α=1)
+    plot!(sp=3, set1, 6, 9; operator=beta, ylim=(-0.5, 0.5), fillrange=nothing, α=1)
     plot!(sp=5, set1, 6, 9; operator=zeta, ylim=(-1, 1 / 2), fillrange=nothing, α=1)
     # 
     plot!(sp=2, set2, 6, 9, title="With Interf.")
@@ -324,7 +328,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.0"
 manifest_format = "2.0"
-project_hash = "e1073f0b81f81fc11452f0b271d4a474e0191cc3"
+project_hash = "f77a9d453ed376370896bfdf7acd3e990313016d"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -1345,7 +1349,6 @@ version = "0.9.1+5"
 # ╠═89a056e5-2f6b-4ba5-8a4d-eaefc7f3f174
 # ╠═efbe708c-f7e0-4146-ad37-d90239728a57
 # ╠═7eb64856-8a39-4fde-b729-c529bce19fab
-# ╟─a750c62a-261f-4338-9905-c8f2b946b37b
 # ╟─162f2c8f-3095-4c5a-a5da-62c6503c38d4
 # ╠═d9c937c1-1c83-404f-bcc7-6acd2e1a89be
 # ╟─e7e08713-94d2-4022-b74e-43eb53fa2df7
