@@ -2,17 +2,25 @@
 
 The repository collects material for exploratory studies of J/ψ (μ⁺μ⁻) J/ψ (μ⁺μ⁻) system.
 
+
+## Repositories
+
+- [JpsiJpsi]()
+- [cep-phiphi-angular-analysis](https://gitlab.cern.ch/LHCb-QEE/cep-phiphi-angular-analysis)
+
 ## Mattermost
 
-- []
+- [X2VV](https://mattermost.web.cern.ch/lhcb/channels/x2vv)
 
 ## Overleaf
 
 - [link to edit](https://www.overleaf.com/2812294971bkkkbqgtcrtg#062367)
 
-## Code
+## Preview
 
-Pages for the project: [link](http://h2vv.docs.cern.ch)
+Plots and computations in [GitLab Pages](http://h2vv.docs.cern.ch)!
+
+## Repository content
 
 Paper plots in `scripts`:
 
