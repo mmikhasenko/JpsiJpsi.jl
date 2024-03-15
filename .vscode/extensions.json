@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "bungcip.better-toml",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "julialang.language-julia",
+    "ms-vsliveshare.vsliveshare",
+    "oijaz.unicode-latex",
+    "redhat.vscode-yaml",
+    "stkb.rewrap",
+    "streetsidesoftware.code-spell-checker",
+    "travisillig.vscode-json-stable-stringify",
+    "yzhang.markdown-all-in-one"
+  ]
+}

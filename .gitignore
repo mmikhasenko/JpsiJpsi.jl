@@ -1,0 +1,17 @@
+*.jl.*.cov
+*.jl.cov
+*.jl.mem
+.DS_Store
+/Manifest.toml
+/dev/
+
+*.out
+*.fls
+*.log
+*.gz
+*.fdb_latexmk
+*.aux
+*.blg
+*.bbl
+*.ipynb_check*
+main.pdf
