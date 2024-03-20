@@ -214,6 +214,9 @@ begin
     const Γ₁ = 0.08
 end;
 
+# ╔═╡ dcd8c26f-d372-4d0b-945a-891e2032697c
+savefig(joinpath(@__DIR__, "..", "plots", "two_scenarii.pdf"))
+
 # ╔═╡ e7e08713-94d2-4022-b74e-43eb53fa2df7
 begin
     struct TwoColumn{L,R}
@@ -237,7 +240,7 @@ md"""
 ###### Continuum
 Nc = $(@bind Nc Slider(range(0.1,50,1000), show_value=true, default=44.3))
 
-bₓ = $(@bind bₓ Slider(range(0.1,1/sqrt(2),1000), show_value=true, default=0.55))
+bₓ = $(@bind bₓ Slider(range(0.1,1/sqrt(2),1000), show_value=true, default=0.65))
 
 ###### Narrow resonance
 N₁ = $(@bind N₁ Slider(range(0.1,10,100), show_value=true, default=6.3))
@@ -260,7 +263,7 @@ Nc′ = $(@bind Nc′ Slider(range(0.1,50,1000), show_value=true, default=44.3))
 ϕ = $(@bind ϕ Slider(range(-π,π,1000), show_value=true, default=0))
 
 ###### Narrow resonance
-N₁′ = $(@bind N₁′ Slider(range(0.1,10,100), show_value=true, default=6.3))
+N₁′ = $(@bind N₁′ Slider(range(0.1,10,100), show_value=true, default=4.5))
 
 ###### Broad Resonance
 m₂ = $(@bind m₂′ Slider(range(6.0,6.55,100), show_value=true, default=6.45))
@@ -284,8 +287,8 @@ set1 = [
 set2 = [
     Wave("0+"; N=Nc′, b=bₓ, d=-sqrt(1 - 2bₓ^2), lineshape=Continuum(0.65568 / 2)),
     # 
-    Wave("2+"; N=N₁′, b=1 / sqrt(2), lineshape=BW(m₁, Γ₁)),
-    Wave("0+"; N=N₂′, b=-b₂′, d=sqrt(1 - 2b₂′^2), lineshape=BW(m₂′, Γ₂′))];
+    Wave("2+"; N=N₁′, b=0.6, d=sqrt(1-2*(0.6)^2), lineshape=BW(m₁, Γ₁)),
+    Wave("0+"; N=N₂′, b=-b₂′*cis(ϕ), d=sqrt(1 - 2b₂′^2), lineshape=BW(m₂′, Γ₂′))];
 
 # ╔═╡ d9c937c1-1c83-404f-bcc7-6acd2e1a89be
 let
@@ -299,6 +302,27 @@ let
     plot!(sp=2, set2, 6, 9, title="With Interf.")
     plot!(sp=4, set2, 6, 9; operator=beta, ylim=(-0.3, 0.3), fillrange=nothing, α=1)
     plot!(sp=6, set2, 6, 9; operator=zeta, ylim=(-1, 1 / 2), fillrange=nothing, α=1)
+end
+
+# ╔═╡ c1346a20-a2d0-4b66-890b-09ddbc3b892e
+let
+    plot(layout=grid(2, 2), size=(700, 600),
+        ylab=[L"\mathrm{Intensity}" L"\mathrm{Intensity}" L"\beta" L"\zeta"], xlab=L"m(J/\psi\,J/\psi)\,\,[\mathrm{GeV}]", lagend_font_size=9)
+    # 
+    plot!(sp=1, set1, 6, 9, title=L"\mathrm{No\,\,interference}", lw=1.5, yaxis=nothing, ylim=(:auto, :auto))
+    plot!(sp=2, set2, 6, 9, title=L"\mathrm{With\,\,interference}", ls=:dash, lw=1.5, yaxis=nothing, ylim=(:auto, :auto))
+	# 
+    plot!(sp=3, x->beta(set1, x), 6, 9, ylim=(-0.28,0.28), lw=1.5, lc=1)
+    plot!(sp=4, x->zeta(set1, x), 6, 9, ylim=(-1.1,0.6), lw=1.5, lc=1)
+	# 
+    plot!(sp=3, x->beta(set2, x), 6, 9, lw=1.5, lc=1, ls=:dash)
+    plot!(sp=4, x->zeta(set2, x), 6, 9, lw=1.5, lc=1, ls=:dash)
+	# 
+	hspan!(sp=4, [0.5,0.6], c=:gray, alpha=0.2)
+	hspan!(sp=4, [-1.1, -1.0], c=:gray, alpha=0.2)
+	#
+	hspan!(sp=3, [0.25,0.3], c=:gray, alpha=0.2)
+	hspan!(sp=3, [-3, -0.25], c=:gray, alpha=0.2)
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1503,6 +1527,8 @@ version = "1.4.1+1"
 # ╠═7eb64856-8a39-4fde-b729-c529bce19fab
 # ╟─162f2c8f-3095-4c5a-a5da-62c6503c38d4
 # ╠═d9c937c1-1c83-404f-bcc7-6acd2e1a89be
+# ╠═c1346a20-a2d0-4b66-890b-09ddbc3b892e
+# ╠═dcd8c26f-d372-4d0b-945a-891e2032697c
 # ╟─e7e08713-94d2-4022-b74e-43eb53fa2df7
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
