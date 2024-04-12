@@ -14,8 +14,8 @@ begin
     using LaTeXStrings
     # 
     using PlutoUI
-	using Optim
-	using JSON
+    using Optim
+    using JSON
 end
 
 # ╔═╡ 7e1d0299-925e-48e6-95f2-dd26f86379ae
@@ -131,7 +131,7 @@ begin
     struct Continuum
         β::Float64
     end
-    amplitude(x::Continuum, m::Float64) = exp(-x.β * (m-2mJψ)) / x.β / (exp(-x.β * 3.0) - 1)
+    amplitude(x::Continuum, m::Float64) = exp(-x.β * (m - 2mJψ)) / x.β / (exp(-x.β * 3.0) - 1)
 end;
 
 # ╔═╡ dfd7c46e-ebed-4205-ba27-d8bba025b819
@@ -208,29 +208,29 @@ end;
 
 # ╔═╡ 9c8c53a8-7ea2-4cb2-a45d-1946586daa3b
 function build_models(pars)
-	@unpack N₂′, m₂′, b₂′, ϕ′ = pars
-	# 
-	# fixed
-	m₂ = 6.5
-	Γ₂ = 0.4
-	# 
-	Γ₂′ = 0.45
-	# common for both 
-	α = 0.85
-	# 
-	set1 = [
-	    Wave("0+"; N=1.0, b=0.0, d=1, lineshape=Continuum(α/2)),
-	    # 
-	    Wave("2+"; N=2.0, b=1, d=1, lineshape=BW(m₁, Γ₁)),
-	    Wave("1-"; N=2.5, a=1, lineshape=BW(m₂, Γ₂))];
-	# 
-	set2 = [
-	    Wave("0+"; N=1.0, b=1/sqrt(2), d=0, lineshape=Continuum(α/2)),
-	    # 
-	    Wave("1-"; N=2.2, a=1, lineshape=BW(m₁, Γ₁)),
-	    Wave("0+"; N=N₂′, b=b₂′*cis(ϕ′), d=sqrt(1 - 2b₂′^2), lineshape=BW(m₂′, Γ₂′))];
-	# 
-	set1, set2
+    @unpack N₂′, m₂′, b₂′, ϕ′ = pars
+    # 
+    # fixed
+    m₂ = 6.5
+    Γ₂ = 0.4
+    # 
+    Γ₂′ = 0.45
+    # common for both 
+    α = 0.85
+    # 
+    set1 = [
+        Wave("0+"; N=1.0, b=0.0, d=1, lineshape=Continuum(α / 2)),
+        # 
+        Wave("2+"; N=2.0, b=1, d=1, lineshape=BW(m₁, Γ₁)),
+        Wave("1-"; N=2.5, a=1, lineshape=BW(m₂, Γ₂))]
+    # 
+    set2 = [
+        Wave("0+"; N=1.0, b=1 / sqrt(2), d=0, lineshape=Continuum(α / 2)),
+        # 
+        Wave("1-"; N=2.2, a=1, lineshape=BW(m₁, Γ₁)),
+        Wave("0+"; N=N₂′, b=b₂′ * cis(ϕ′), d=sqrt(1 - 2b₂′^2), lineshape=BW(m₂′, Γ₂′))]
+    # 
+    set1, set2
 end
 
 # ╔═╡ 6e9ab0bf-38dd-4ef8-bd94-cffbd8be0d78
@@ -241,21 +241,21 @@ the total intensity of one model by the other
 
 # ╔═╡ 606cd761-1503-4d34-9b19-68a973eb3fb8
 function objective(pars)
-	set1, set2 = build_models(pars)
-	# 
-	xv = range(6.0, 7.0, 30)
-	y1v = intensity.(set1 |> Ref, xv)
-	y2v = intensity.(set2 |> Ref, xv)
-	# 
-	return sum(abs2, y1v ./ sum(y1v) - y2v ./ sum(y2v))
+    set1, set2 = build_models(pars)
+    # 
+    xv = range(6.0, 7.0, 30)
+    y1v = intensity.(set1 |> Ref, xv)
+    y2v = intensity.(set2 |> Ref, xv)
+    # 
+    return sum(abs2, y1v ./ sum(y1v) - y2v ./ sum(y2v))
 end
 
 # ╔═╡ 479287b1-2f2c-463c-bc5f-8ca45e0771e5
 pars_fit = let
-	l(x) = objective(v2p(x))
-	v2p(x) = NamedTuple{(:b₂′,:ϕ′,:m₂′,:N₂′)}(Tuple(x))
-	res = optimize(l, [0.3, 1.0, 6.45, 2.0])
-	v2p(res.minimizer)
+    l(x) = objective(v2p(x))
+    v2p(x) = NamedTuple{(:b₂′, :ϕ′, :m₂′, :N₂′)}(Tuple(x))
+    res = optimize(l, [0.3, 1.0, 6.45, 2.0])
+    v2p(res.minimizer)
 end
 
 # ╔═╡ ccc29e5a-19ff-4dff-8fd6-ffac06e4fb41
@@ -271,33 +271,33 @@ let
     plot(layout=grid(2, 2), size=(700, 600),
         ylab=[L"\mathrm{Intensity}" L"\mathrm{Intensity}" L"\beta" L"\zeta"], xlab=L"m(J/\psi\,J/\psi)\,\,[\mathrm{GeV}]", lagend_font_size=9)
     # 
-    plot!(sp=1, x->intensity(set1, x), 6, 9, lw=1.5, ylim=(0, 5.5), legendtitle="Scenario 1", lab="Total", yaxis=nothing)
-    plot!(sp=2, x->intensity(set2, x), 6, 9, ls=:dash, lw=1.5, ylim=(0, 6.3), legendtitle="Scenario 2", lab="Total", yaxis=nothing)
-	# 
-	for (i,lab) in [
-		(1,"Continuum"), (2,"Narrow Resonance"), (3,"Broad Resonance")]
-	    plot!(sp=1, x->intensity(set1[i:i], x), 6, 9; lw=1.5, fill=0, α=0.4,
-			lab = lab*"($(set1[i].jp))")
-	    plot!(sp=2, x->intensity(set2[i:i], x), 6, 9; ls=:dash, lw=1.5, fill=0, α=0.4,
-			lab = lab*"($(set2[i].jp))")
-	end
-	# 
-    plot!(sp=3, x->beta(set1, x), 6, 9, ylim=(-0.1,0.28), lw=1.5, lc=1,  
-		lab="Scenario 1")
-    plot!(sp=4, x->zeta(set1, x), 6, 9, ylim=(-1.1,0.6), lw=1.5, lc=1, 
-		lab="Scenario 1")
-	# 
-    plot!(sp=3, x->beta(set2, x), 6, 9, lw=1.5, lc=1, ls=:dash, lab="Scenario 2")
-    plot!(sp=4, x->zeta(set2, x), 6, 9, lw=1.5, lc=1, ls=:dash, lab="Scenario 2")
-	# 
-	hspan!(sp=4, [0.5,0.6], c=:gray, alpha=0.2)
-	hspan!(sp=4, [-1.1, -1.0], c=:gray, alpha=0.2)
-	#
-	hspan!(sp=3, [0.25,0.3], c=:gray, alpha=0.2)
-	hspan!(sp=3, [-3, -0.25], c=:gray, alpha=0.2)
-	# 
-	plot!(sp=3, legend=:bottomright)
-	plot!(sp=4, legend=:right, dpi=500)
+    plot!(sp=1, x -> intensity(set1, x), 6, 9, lw=1.5, ylim=(0, 5.5), legendtitle="Scenario 1", lab="Total", yaxis=nothing)
+    plot!(sp=2, x -> intensity(set2, x), 6, 9, ls=:dash, lw=1.5, ylim=(0, 6.3), legendtitle="Scenario 2", lab="Total", yaxis=nothing)
+    # 
+    for (i, lab) in [
+        (1, "Continuum"), (2, "Narrow Resonance"), (3, "Broad Resonance")]
+        plot!(sp=1, x -> intensity(set1[i:i], x), 6, 9; lw=1.5, fill=0, α=0.4,
+            lab=lab * "($(set1[i].jp))")
+        plot!(sp=2, x -> intensity(set2[i:i], x), 6, 9; ls=:dash, lw=1.5, fill=0, α=0.4,
+            lab=lab * "($(set2[i].jp))")
+    end
+    # 
+    plot!(sp=3, x -> beta(set1, x), 6, 9, ylim=(-0.1, 0.28), lw=1.5, lc=1,
+        lab="Scenario 1")
+    plot!(sp=4, x -> zeta(set1, x), 6, 9, ylim=(-1.1, 0.6), lw=1.5, lc=1,
+        lab="Scenario 1")
+    # 
+    plot!(sp=3, x -> beta(set2, x), 6, 9, lw=1.5, lc=1, ls=:dash, lab="Scenario 2")
+    plot!(sp=4, x -> zeta(set2, x), 6, 9, lw=1.5, lc=1, ls=:dash, lab="Scenario 2")
+    # 
+    hspan!(sp=4, [0.5, 0.6], c=:gray, alpha=0.2)
+    hspan!(sp=4, [-1.1, -1.0], c=:gray, alpha=0.2)
+    #
+    hspan!(sp=3, [0.25, 0.3], c=:gray, alpha=0.2)
+    hspan!(sp=3, [-3, -0.25], c=:gray, alpha=0.2)
+    # 
+    plot!(sp=3, legend=:bottomright)
+    plot!(sp=4, legend=:right, dpi=500)
 end
 
 # ╔═╡ dcd8c26f-d372-4d0b-945a-891e2032697c
@@ -305,9 +305,9 @@ savefig(joinpath(@__DIR__, "..", "plots", "two_scenarios.pdf"))
 
 # ╔═╡ 006a4d0d-bea2-4260-84aa-cfdbe31c9fa6
 open(joinpath(@__DIR__, "..", "data", "two_scenarios.json"), "w") do io
-	JSON.print(io, Dict(
-		:scenario1 => set1,
-		:scenario2 => set2))
+    JSON.print(io, Dict(
+        :scenario1 => set1,
+        :scenario2 => set2))
 end
 
 # ╔═╡ 6bdc1291-0245-41b4-b445-bb896e502f00
