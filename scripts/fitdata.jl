@@ -80,7 +80,6 @@ fit_model = let
     updatepars(χ2.f, fit_pars)
 end
 
-
 let
     plot()
     plot!(fit_model, mth, 9, label="Fit model", l=(2, :red))
